@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {Duree} from '../Classes/duree';
+import { Observable, Subscription } from 'rxjs/Rx';
+
 
 @Component({
   selector: 'app-duree',
@@ -8,16 +10,44 @@ import {Duree} from '../Classes/duree';
 })
 export class DureeComponent implements OnInit {
 
-  duree: Duree = {start: new Date(1995, 0, 30), end: new Date()};
+  duree: Duree = null;
 
+
+  sub: Subscription;
+
+  actif:boolean = false;
+
+  ngOnInit() {
+    this.duree =  {start:null,end:null,secondsPassed:0};
+  }
 
   constructor() {
   }
 
-  ngOnInit() {
+
+
+  public startTimer() {
+    if(this.duree.start == null) {
+      this.duree.start = new Date();
+    }
+    if(!this.actif) {
+      let timer = Observable.timer(1, 1000);
+      this.sub = timer.subscribe(
+        t => {
+          this.duree.secondsPassed++;
+        }
+      );
+      this.actif = true;
+    }
   }
 
-  timeElapsed(): number {
-    return (this.duree.end.getTime() - this.duree.start.getTime()) / 1000;
+  public stop(): void  {
+    if(this.actif) {
+      this.duree.end=new Date();
+      this.sub.unsubscribe();
+      this.actif = false;
+    }
   }
+
+
 }
