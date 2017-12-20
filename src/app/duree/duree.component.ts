@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {Duree} from '../Classes/duree';
 import { Observable, Subscription } from 'rxjs/Rx';
 
@@ -10,21 +10,16 @@ import { Observable, Subscription } from 'rxjs/Rx';
 })
 export class DureeComponent implements OnInit {
 
-  duree: Duree = null;
-
-
+  @Input()
+  duree: Duree;
   sub: Subscription;
-
   actif:boolean = false;
 
   ngOnInit() {
-    this.duree =  {start:null,end:null,secondsPassed:0};
   }
 
   constructor() {
   }
-
-
 
   public startTimer() {
     if(this.duree.start == null) {
@@ -41,7 +36,7 @@ export class DureeComponent implements OnInit {
     }
   }
 
-  public stop(): void  {
+  public stopTimer(): void  {
     if(this.actif) {
       this.duree.end=new Date();
       this.sub.unsubscribe();

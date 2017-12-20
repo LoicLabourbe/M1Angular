@@ -5,11 +5,13 @@ import { HttpModule } from '@angular/http';
 
 import { AppComponent } from './app.component';
 import {DureeComponent} from './duree/duree.component';
+import { ActivityComponent } from './activity/activity.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    DureeComponent
+    DureeComponent,
+    ActivityComponent
   ],
   imports: [
     BrowserModule,

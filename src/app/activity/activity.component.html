@@ -1,0 +1,25 @@
+<p>
+  Nom de l'activité: {{nom }}
+</p>
+<p>
+  Description de l'activité: {{description}}
+</p>
+<p>
+  Catégorie: {{category.libelle}}
+</p>
+<div *ngIf="mesDurees">
+  <ul>
+    <li *ngFor="let duree of mesDurees">
+      <p>
+        Debut: {{duree.start | date: 'dd/MM/yyyy HH:MM:ss'}}
+        Fin: {{duree.end | date: 'dd/MM/yyyy HH:MM:ss'}}
+        Durée: {{duree.secondsPassed}}
+      </p>
+    </li>
+  </ul>
+</div>
+
+
+<app-duree [duree]="duree"></app-duree>
+<button (click)="start()">Start</button>
+<button (click)="stop()">Stop</button>

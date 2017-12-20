@@ -1,14 +1,6 @@
-<p *ngIf="duree.start">
-  Debut {{duree.start | date: 'dd/MM/yyyy HH:MM:ss'}}
+<p *ngIf="duree.secondsPassed!=0">
+  Timer: {{duree.secondsPassed}}
 </p>
-<p *ngIf="duree.end">
-  Fin {{duree.end | date: 'dd/MM/yyyy HH:MM:ss'}}
-</p>
-<p>
-  Il s'est écoulé {{duree.secondsPassed}}
-</p>
-<button (click)="startTimer()">Start</button>
-<button (click)="stop()">Stop</button>
 
 
 
