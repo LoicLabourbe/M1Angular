@@ -1,0 +1,29 @@
+<div *ngIf="visible">
+
+
+  <!-- Catégories déjà existantes -->
+  <p>Toute les catégories déjà existantes
+  <select>
+    <option *ngFor="let category of allCategories" >{{category.libelle}} {{category.color.libelle}}</option>
+  </select><br>
+  </p>
+
+
+  <!-- Libellé -->
+  <p>Libellé de la catégorie
+  <input type="text" [(ngModel)]="libelle" >
+  </p>
+
+<!--Code  -->
+<p>Code couleur HTML
+<select [(ngModel)]="color">
+  <option *ngFor="let color of possibleColors" [value]="color">{{color.libelle}}</option>
+</select>
+</p>
+
+<button (click)="ajouterCategory(libelle,color)">Valider</button>
+<br>
+</div>
+
+
+<button (click)="clickButton()">{{texteBouton}}</button>

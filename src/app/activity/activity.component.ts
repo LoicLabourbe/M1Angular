@@ -1,7 +1,9 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
+import {Component, Input, OnInit, ViewChild} from '@angular/core';
 import {Category} from '../Classes/category';
 import {Duree} from '../Classes/duree';
 import {DureeComponent} from '../duree/duree.component';
+import {COLORS} from '../const/availableColors';
+import {Color} from '../Classes/color';
 
 @Component({
   selector: 'app-activity',
@@ -10,22 +12,23 @@ import {DureeComponent} from '../duree/duree.component';
 })
 export class ActivityComponent implements OnInit {
 
+  @Input()
   nom:string;
+  @Input()
   description:string;
+  @Input()
   category:Category;
+  @Input()
   duree:Duree;
+  @Input()
   mesDurees:Duree[];
 
   @ViewChild(DureeComponent) child:DureeComponent;
 
-  constructor() { }
+  constructor() {
+  }
 
   ngOnInit() {
-      this.nom = "Projet";
-      this.description="Le projet d'angular.";
-      this.category={libelle:"Travail"};
-      this.duree =  new Duree();
-      this.mesDurees=[];
   }
 
 
@@ -33,6 +36,7 @@ export class ActivityComponent implements OnInit {
     console.log(this.child);
     this.child.startTimer();
   }
+
   public stop():void{
     this.child.stopTimer();
     this.mesDurees.push(this.duree);

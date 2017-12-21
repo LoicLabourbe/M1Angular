@@ -6,12 +6,16 @@ import { HttpModule } from '@angular/http';
 import { AppComponent } from './app.component';
 import {DureeComponent} from './duree/duree.component';
 import { ActivityComponent } from './activity/activity.component';
+import { MenuComponent } from './menu/menu.component';
+import { FormulaireCategoryComponent } from './formulaire-category/formulaire-category.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     DureeComponent,
-    ActivityComponent
+    ActivityComponent,
+    MenuComponent,
+    FormulaireCategoryComponent
   ],
   imports: [
     BrowserModule,
