@@ -8,6 +8,7 @@ import {DureeComponent} from './duree/duree.component';
 import { ActivityComponent } from './activity/activity.component';
 import { MenuComponent } from './menu/menu.component';
 import { FormulaireCategoryComponent } from './formulaire-category/formulaire-category.component';
+import { FormulaireActiviteComponent } from './formulaire-activite/formulaire-activite.component';
 
 @NgModule({
   declarations: [
@@ -15,7 +16,8 @@ import { FormulaireCategoryComponent } from './formulaire-category/formulaire-ca
     DureeComponent,
     ActivityComponent,
     MenuComponent,
-    FormulaireCategoryComponent
+    FormulaireCategoryComponent,
+    FormulaireActiviteComponent
   ],
   imports: [
     BrowserModule,

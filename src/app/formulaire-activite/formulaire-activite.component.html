@@ -1,0 +1,34 @@
+<div *ngIf="visible">
+  <h4>Création d'une nouvelle activité</h4>
+
+  <!-- Libellé de l'activité -->
+  <div>
+    <label>Libellé</label>
+    <input type="text" [(ngModel)]="libelle" >
+  </div>
+
+
+  <!-- Catégorie -->
+  <div>
+      <label>Catégorie:</label>
+      <select [(ngModel)]="category">
+        <option *ngFor="let c of allCategories" [ngValue]="c">{{c.libelle}}</option>
+      </select>
+  </div>
+
+
+  <!--Description  -->
+  <div>
+    <textarea [(ngModel)]="actDesc" placeholder="Description"></textarea>
+  </div>
+
+  <button (click)="ajouterActivity(libelle,actDesc,category)">Valider</button>
+
+  <br><br>
+</div>
+
+
+
+
+
+<button (click)="clickButton()">{{texteBouton}}</button>

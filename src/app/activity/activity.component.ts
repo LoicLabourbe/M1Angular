@@ -2,8 +2,8 @@ import {Component, Input, OnInit, ViewChild} from '@angular/core';
 import {Category} from '../Classes/category';
 import {Duree} from '../Classes/duree';
 import {DureeComponent} from '../duree/duree.component';
-import {COLORS} from '../const/availableColors';
-import {Color} from '../Classes/color';
+import {Activity} from '../Classes/activity';
+
 
 @Component({
   selector: 'app-activity',
@@ -13,14 +13,13 @@ import {Color} from '../Classes/color';
 export class ActivityComponent implements OnInit {
 
   @Input()
+  myActivity:Activity;
+
+
   nom:string;
-  @Input()
   description:string;
-  @Input()
   category:Category;
-  @Input()
   duree:Duree;
-  @Input()
   mesDurees:Duree[];
 
   @ViewChild(DureeComponent) child:DureeComponent;
@@ -29,6 +28,11 @@ export class ActivityComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.nom=this.myActivity.nom;
+    this.description=this.myActivity.description;
+    this.category=this.myActivity.category;
+    this.duree=this.myActivity.duree;
+    this.mesDurees=this.myActivity.mesDurees;
   }
 
 

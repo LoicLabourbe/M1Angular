@@ -14,8 +14,8 @@ export class FormulaireCategoryComponent implements OnInit {
   allCategories:Category[];
 
 
-  visible:boolean;
-  texteBouton:string = 'Nouvelle Catégorie';
+  visible:boolean=false;
+  texteBouton:string = 'Nouvelle catégorie';
 
   possibleColors=COLORS;
 
@@ -26,6 +26,9 @@ export class FormulaireCategoryComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
+    if(0<this.possibleColors.length){
+      this.color=this.possibleColors[0];
+    }
   }
 
   clickButton(): void{
