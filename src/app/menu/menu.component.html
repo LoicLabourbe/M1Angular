@@ -1,9 +1,0 @@
-<h2>{{title}}</h2>
-
-<app-formulaire-category [allCategories]="allCategories"></app-formulaire-category>
-<app-formulaire-activite [allActivities]="allActivities" [allCategories]="allCategories"></app-formulaire-activite>
-
-<app-activity *ngFor="let activity of allActivities"
-              [myActivity]="activity">
-
-</app-activity>

@@ -1,6 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {Activity} from '../Classes/activity';
 import {Category} from '../Classes/category';
+import {DataService} from '../services/data.service';
 
 @Component({
   selector: 'app-formulaire-activite',
@@ -9,13 +10,10 @@ import {Category} from '../Classes/category';
 })
 export class FormulaireActiviteComponent implements OnInit {
 
-  @Input()
   allActivities:Activity[];
-  @Input()
   allCategories:Category[];
 
   visible:boolean=false;
-  texteBouton:string="Nouvelle activité";
 
   //champ du formulaire pour la création d'une activité
   libelle:string;
@@ -23,23 +21,17 @@ export class FormulaireActiviteComponent implements OnInit {
   actDesc:string;
 
 
-  constructor() { }
+  constructor(private dataService:DataService) { }
 
   ngOnInit() {
+    this.allCategories=this.dataService.getCategories();
+    this.allActivities=this.dataService.getActivities();
     if(0<this.allCategories.length){
       this.category=this.allCategories[0];
     }
+
   }
 
-  clickButton(): void{
-    if(this.visible){
-      this.texteBouton="Nouvelle activité";
-      this.visible=false;
-    }else{
-      this.texteBouton="Cacher ce menu";
-      this.visible=true;
-    }
-  }
 
   ajouterActivity(libelle:string,actDesc:string,category:Category):void{
     this.allActivities.push(new Activity(libelle,actDesc,category));
