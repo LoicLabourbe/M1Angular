@@ -1,6 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {Duree} from '../Classes/duree';
-import { Observable, Subscription } from 'rxjs/Rx';
+import {Observable, Subscription} from 'rxjs/Rx';
 
 
 @Component({

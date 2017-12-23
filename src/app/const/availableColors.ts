@@ -1,4 +1,4 @@
-import  {Color} from '../Classes/color';
+import {Color} from '../Classes/color';
 
 export const COLORS: Color[]=[
   {libelle:"rouge",htmlCode:"#FF0000"},

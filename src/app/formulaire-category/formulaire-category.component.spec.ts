@@ -1,6 +1,6 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { FormulaireCategoryComponent } from './formulaire-category.component';
+import {FormulaireCategoryComponent} from './formulaire-category.component';
 
 describe('FormulaireCategoryComponent', () => {
   let component: FormulaireCategoryComponent;

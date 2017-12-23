@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {Category} from '../Classes/category';
 import {COLORS} from '../const/availableColors';
 import {Color} from '../Classes/color';
