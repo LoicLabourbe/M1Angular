@@ -12,6 +12,7 @@ import {HomeComponent} from './home/home.component';
 import {DataService} from './services/data.service';
 import {AppRoutingModule} from './app-routing.module';
 import {CategoryComponent} from './category/category.component';
+import {HomeActivityComponent} from './homeActivity/homeActivity.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import {CategoryComponent} from './category/category.component';
     FormulaireCategoryComponent,
     FormulaireActiviteComponent,
     HomeComponent,
-    CategoryComponent
+    CategoryComponent,
+    HomeActivityComponent
   ],
   imports: [
     BrowserModule,

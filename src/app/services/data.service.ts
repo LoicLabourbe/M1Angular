@@ -8,9 +8,9 @@ export class DataService{
 
 
   private allCategories:Category[]=[
-    {libelle:"Travail",color:COLORS[0]}
-    ,{libelle:"Détente",color:COLORS[1]}
-    ,{libelle:"Loisirs",color:COLORS[2]}
+    {libelle:"Travail",color:COLORS[0],id:0}
+    ,{libelle:"Détente",color:COLORS[1],id:1}
+    ,{libelle:"Loisirs",color:COLORS[2],id:2}
   ];
 
   private  allActivities:Activity[]=[
@@ -28,4 +28,13 @@ export class DataService{
     return this.allActivities;
   }
 
+  getActivitiesByCategory(id:number):Activity[]{
+    var tab:Activity[] = [];
+    for(var i = 0;i<this.allActivities.length;i++) {
+      if(this.allActivities[i].category.id==id){
+        tab.push(this.allActivities[i]);
+      }
+    }
+    return tab;
+  }
 }
