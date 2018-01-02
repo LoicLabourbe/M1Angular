@@ -33,6 +33,7 @@ export class FormulaireCategoryComponent implements OnInit {
 
   ajouterCategory(libelle:string,color:Color){
     this.allCategories.push(new Category(libelle,color));
+    //console.log("color :"+this.color.libelle);
     this.reinitialiser();
   }
 
