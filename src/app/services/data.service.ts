@@ -16,6 +16,7 @@ export class DataService{
   private  allActivities:Activity[]=[
     new Activity("Projet","Le projet d'angular",this.allCategories[0])
     ,new Activity("Repos","Se reposer après avoir bien travaillé",this.allCategories[1])
+    ,new Activity("Jeux vidéos","Après l'effort, le réconfort",this.allCategories[2])
   ];
 
 

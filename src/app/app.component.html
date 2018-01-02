@@ -5,5 +5,8 @@
 <a routerLink="/home"><button>Home</button></a>
 <a routerLink="/formulaireCategory"><button>Nouvelle catégorie</button></a>
 <a routerLink="/formulaireActivite"><button>Nouvelle activité</button></a>
+<div  *ngFor="let category of allCategories">
+  <app-category [myCategory]="category"></app-category>
+</div>
 <router-outlet></router-outlet>
 
