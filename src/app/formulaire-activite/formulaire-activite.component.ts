@@ -47,7 +47,7 @@ export class FormulaireActiviteComponent implements OnInit {
     if(libelle!=null && actDesc!=null && category!=null){
       this.nbAct++;
       localStorage.setItem('nbAct',this.nbAct.toString());
-      this.dataService.addAct(new Activity(libelle,actDesc,category))
+      this.dataService.addAct(new Activity(libelle,actDesc,category));
       this.ajoutLocal(libelle,actDesc,category.libelle);
       this.reinitialiser();
     }
