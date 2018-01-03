@@ -27,7 +27,7 @@ export class DataService{
       var l = localStorage.getItem('libelleCat'+i);
       var c = localStorage.getItem('colorCat'+i);
       var h = localStorage.getItem('htmlCat'+i);
-      this.addCat(new Category(l,new Color(c,h)));
+      this.addCat(new Category(l,new Color(c,h),this.allCategories.length));
     }
     return this.allCategories;
   }
@@ -58,7 +58,7 @@ export class DataService{
       var c = localStorage.getItem('colorCat'+i);
       var h = localStorage.getItem('htmlCat'+i);
       if(l === nom){
-        return new Category(l,new Color(c,h));
+        return new Category(l,new Color(c,h),this.allCategories.length);
       }
     }
   }
@@ -87,6 +87,14 @@ export class DataService{
     }
   }
 
-
+  getActivitiesByCategory(id:number):Activity[]{
+    var tab:Activity[] = [];
+    for(var i=0;i<this.allActivities.length;i++){
+      if(id == this.allActivities[i].category.id){
+        tab.push(this.allActivities[i]);
+      }
+    }
+    return tab;
+  }
 
 }

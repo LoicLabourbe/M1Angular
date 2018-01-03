@@ -52,7 +52,7 @@ export class FormulaireCategoryComponent implements OnInit {
     if(libelle!=null){
       this.nbCategorie++;
       localStorage.setItem('nbCategorie',this.nbCategorie.toString());
-      this.dataService.addCat(new Category(libelle,color));
+      this.dataService.addCat(new Category(libelle,color,this.dataService.getCategories().length));
       this.ajoutLocal(libelle,color);
       for(var i = 0; i<=this.possibleColors.length; i++){
         if(color === this.possibleColors[i]){
@@ -60,7 +60,7 @@ export class FormulaireCategoryComponent implements OnInit {
           break;
         }
       }
-      this.allCategories.push(new Category(libelle,color));
+      this.allCategories.push(new Category(libelle,color,this.dataService.getCategories().length));
       this.reinitialiser();
     }
   }
