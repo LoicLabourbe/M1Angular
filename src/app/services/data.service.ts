@@ -89,9 +89,9 @@ export class DataService{
 
   getActivitiesByCategory(id:number):Activity[]{
     var tab:Activity[] = [];
-    for(var i=0;i<this.allActivities.length;i++){
-      if(id == this.allActivities[i].category.id){
-        tab.push(this.allActivities[i]);
+    for(var i=0;i<this.getActivities().length;i++){
+      if(id === this.getActivities()[i].category.id){
+        tab.push(this.getActivities()[i]);
       }
     }
     return tab;
