@@ -21,6 +21,8 @@ export class ActivityComponent implements OnInit {
   category:Category;
   duree:Duree;
   mesDurees:Duree[];
+  nbdurees:number;
+  lance:boolean;
 
   @ViewChild(DureeComponent) child:DureeComponent;
 
@@ -33,18 +35,37 @@ export class ActivityComponent implements OnInit {
     this.category=this.myActivity.category;
     this.duree=this.myActivity.duree;
     this.mesDurees=this.myActivity.mesDurees;
+    if (localStorage.getItem('nbdurees'+this.nom) === null)
+    {
+      this.nbdurees = 0;
+      localStorage.setItem('nbdurees'+this.nom,'0');
+    }
+    else {
+      this.nbdurees = parseInt(localStorage.getItem('nbdurees'+this.nom),10);
+    }
   }
 
 
-  public start():void{
+  public start():void {
+    if (!this.lance) {
     console.log(this.child);
     this.child.startTimer();
+    this.lance=true;
+    }
   }
 
-  public stop():void{
-    this.child.stopTimer();
-    this.mesDurees.push(this.duree);
-    this.duree=new Duree();
+  public stop():void {
+    if (this.lance) {
+      this.child.stopTimer();
+      this.mesDurees.push(this.duree);
+      this.nbdurees++;
+      localStorage.setItem('nbdurees' + this.nom, this.nbdurees.toString());
+      localStorage.setItem('startDuree' + this.nom + this.nbdurees, this.duree.start.getTime().toString());
+      localStorage.setItem('endDuree' + this.nom + this.nbdurees, this.duree.end.getTime().toString());
+      localStorage.setItem('Duree' + this.nom + this.nbdurees, this.duree.secondsPassed.toString());
+      this.duree = new Duree();
+      this.lance=false;
+    }
   }
 
 

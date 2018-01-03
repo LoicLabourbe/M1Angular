@@ -7,6 +7,7 @@ export class Activity{
   category:Category;
   duree:Duree;
   mesDurees:Duree[];
+  lance:boolean;
 
 
 
@@ -16,5 +17,6 @@ export class Activity{
     this.category=category;
     this.duree =new Duree();
     this.mesDurees=[];
+    this.lance=false;
   }
 }

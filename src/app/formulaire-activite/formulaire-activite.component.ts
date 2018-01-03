@@ -2,6 +2,8 @@ import {Component, OnInit} from '@angular/core';
 import {Activity} from '../Classes/activity';
 import {Category} from '../Classes/category';
 import {DataService} from '../services/data.service';
+import {Color} from '../Classes/color';
+import {Duree} from '../Classes/duree';
 
 @Component({
   selector: 'app-formulaire-activite',
@@ -19,29 +21,47 @@ export class FormulaireActiviteComponent implements OnInit {
   libelle:string;
   category:Category;
   actDesc:string;
+  nbAct:number;
 
 
   constructor(private dataService:DataService) { }
 
   ngOnInit() {
+    if (localStorage.getItem('nbAct') === null)
+    {
+      this.nbAct = 0;
+      localStorage.setItem('nbAct','0');
+    }
+    else {
+      this.nbAct = parseInt(localStorage.getItem('nbAct'),10);
+    }
     this.allCategories=this.dataService.getCategories();
     this.allActivities=this.dataService.getActivities();
     if(0<this.allCategories.length){
       this.category=this.allCategories[0];
     }
-
   }
 
 
   ajouterActivity(libelle:string,actDesc:string,category:Category):void{
-    this.allActivities.push(new Activity(libelle,actDesc,category));
-    this.reinitialiser();
+    if(libelle!=null && actDesc!=null && category!=null){
+      this.nbAct++;
+      localStorage.setItem('nbAct',this.nbAct.toString());
+      this.dataService.addAct(new Activity(libelle,actDesc,category))
+      this.ajoutLocal(libelle,actDesc,category.libelle);
+      this.reinitialiser();
+    }
   }
 
   reinitialiser():void{
     this.libelle ="";
-    this.category = null;
     this.actDesc="";
+  }
+
+  ajoutLocal(nom:string, desc:string, cat:string):void{
+    localStorage.setItem('nomAct'+this.nbAct.toString(),nom);
+    localStorage.setItem('descAct'+this.nbAct.toString(),desc);
+    localStorage.setItem('catAct'+this.nbAct.toString(),cat);
   }
 
 }
