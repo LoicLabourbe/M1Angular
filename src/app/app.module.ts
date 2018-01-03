@@ -13,6 +13,7 @@ import {DataService} from './services/data.service';
 import {AppRoutingModule} from './app-routing.module';
 import {CategoryComponent} from './category/category.component';
 import {HomeActivityComponent} from './homeActivity/homeActivity.component';
+import {HomeCategoryComponent} from './homeCategory/homeCategory.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import {HomeActivityComponent} from './homeActivity/homeActivity.component';
     FormulaireActiviteComponent,
     HomeComponent,
     CategoryComponent,
-    HomeActivityComponent
+    HomeActivityComponent,
+    HomeCategoryComponent
   ],
   imports: [
     BrowserModule,

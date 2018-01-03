@@ -23,7 +23,7 @@ export class HomeActivityComponent implements OnInit {
 
   ngOnInit() {
     this.route.params.subscribe(params => {
-      this.id = params.id;
+      this.id = params['id'];
     });
     this.allActivities=this.dataService.getActivitiesByCategory(this.id);
     if(this.allActivities.length === 0){
