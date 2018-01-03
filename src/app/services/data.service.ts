@@ -27,7 +27,7 @@ export class DataService{
       var l = localStorage.getItem('libelleCat'+i);
       var c = localStorage.getItem('colorCat'+i);
       var h = localStorage.getItem('htmlCat'+i);
-      this.addCat(new Category(l,new Color(c,h),this.allCategories.length));
+      this.addCat(new Category(l,new Color(c,h)));
     }
     return this.allCategories;
   }
@@ -58,7 +58,7 @@ export class DataService{
       var c = localStorage.getItem('colorCat'+i);
       var h = localStorage.getItem('htmlCat'+i);
       if(l === nom){
-        return new Category(l,new Color(c,h),this.allCategories.length);
+        return new Category(l,new Color(c,h));
       }
     }
   }
