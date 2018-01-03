@@ -35,7 +35,7 @@ export class FormulaireCategoryComponent implements OnInit {
     }
     for(var j =1; j<=parseInt(localStorage.getItem('nbCategorie'),10);j++){
       var c = localStorage.getItem('colorCat'+j);
-      for(var i = 0; i<=this.possibleColors.length; i++){
+      for(var i = 0; i<this.possibleColors.length; i++){
         if(c === this.possibleColors[i].libelle){
           this.possibleColors.splice(i,1);
           break;
