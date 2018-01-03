@@ -25,14 +25,14 @@ export class FormulaireCategoryComponent implements OnInit {
   constructor(private dataService:DataService) { }
 
   ngOnInit() {
-    if (localStorage.getItem('nbCategorie') === null)
-    {
-      this.nbCategorie = 0;
-      localStorage.setItem('nbCategorie','0');
+    this.nbCategorie = parseInt(localStorage.getItem('nbCategorie'),10);
+    this.reductionCouleur();
+    if(0<this.possibleColors.length){
+      this.color=this.possibleColors[0];
     }
-    else {
-      this.nbCategorie = parseInt(localStorage.getItem('nbCategorie'),10);
-    }
+  }
+
+  reductionCouleur(){
     for(var j =1; j<=parseInt(localStorage.getItem('nbCategorie'),10);j++){
       var c = localStorage.getItem('colorCat'+j);
       for(var i = 0; i<this.possibleColors.length; i++){
@@ -42,26 +42,23 @@ export class FormulaireCategoryComponent implements OnInit {
         }
       }
     }
-    if(0<this.possibleColors.length){
-      this.color=this.possibleColors[0];
-    }
   }
 
-
-  ajouterCategory(libelle:string,color:Color):void{
-    if(libelle!=null){
+  ajouterCategory(libelle:string,color:Color):void {
+    if (libelle != null) {
       this.nbCategorie++;
-      localStorage.setItem('nbCategorie',this.nbCategorie.toString());
-      this.dataService.addCat(new Category(libelle,color));
-      this.ajoutLocal(libelle,color);
-      for(var i = 0; i<=this.possibleColors.length; i++){
-        if(color === this.possibleColors[i]){
-          this.possibleColors.splice(i,1);
+      localStorage.setItem('nbCategorie', this.nbCategorie.toString());
+      this.dataService.addCat(new Category(libelle, color,this.nbCategorie));
+      for (var i = 0; i <= this.possibleColors.length; i++) {
+        if (color === this.possibleColors[i]) {
+          this.possibleColors.splice(i, 1);
           break;
         }
       }
-      this.allCategories.push(new Category(libelle,color));
-      this.reinitialiser();
+        var cat = new Category(libelle, color,this.nbCategorie);
+        this.ajoutLocal(libelle, color);
+        this.allCategories.push(cat);
+        this.reinitialiser();
     }
   }
 
@@ -74,7 +71,6 @@ export class FormulaireCategoryComponent implements OnInit {
     localStorage.setItem('libelleCat'+this.nbCategorie.toString(),libelle);
     localStorage.setItem('colorCat'+this.nbCategorie.toString(),color.libelle);
     localStorage.setItem('htmlCat'+this.nbCategorie.toString(),color.htmlCode);
+    localStorage.setItem('id'+this.nbCategorie.toString(),this.nbCategorie.toString());
   }
-
-
 }

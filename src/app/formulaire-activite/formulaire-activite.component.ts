@@ -27,14 +27,7 @@ export class FormulaireActiviteComponent implements OnInit {
   constructor(private dataService:DataService) { }
 
   ngOnInit() {
-    if (localStorage.getItem('nbAct') === null)
-    {
-      this.nbAct = 0;
-      localStorage.setItem('nbAct','0');
-    }
-    else {
-      this.nbAct = parseInt(localStorage.getItem('nbAct'),10);
-    }
+    this.nbAct = parseInt(localStorage.getItem('nbAct'),10);
     this.allCategories=this.dataService.getCategories();
     this.allActivities=this.dataService.getActivities();
     if(0<this.allCategories.length){
@@ -47,7 +40,7 @@ export class FormulaireActiviteComponent implements OnInit {
     if(libelle!=null && actDesc!=null && category!=null){
       this.nbAct++;
       localStorage.setItem('nbAct',this.nbAct.toString());
-      this.dataService.addAct(new Activity(libelle,actDesc,category))
+      this.dataService.addAct(new Activity(libelle,actDesc,category));
       this.ajoutLocal(libelle,actDesc,category.libelle);
       this.reinitialiser();
     }

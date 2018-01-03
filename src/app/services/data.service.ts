@@ -22,25 +22,10 @@ export class DataService{
 
 
   getCategories():Category[]{
-    this.allCategories = [];
-    for (var i=1; i<=parseInt(localStorage.getItem('nbCategorie'),10);i++){
-      var l = localStorage.getItem('libelleCat'+i);
-      var c = localStorage.getItem('colorCat'+i);
-      var h = localStorage.getItem('htmlCat'+i);
-      this.addCat(new Category(l,new Color(c,h)));
-    }
     return this.allCategories;
   }
 
   getActivities():Activity[]{
-    this.allActivities =[];
-    for(var i=1; i<=parseInt(localStorage.getItem('nbAct'),10);i++){
-      var l = localStorage.getItem('nomAct'+i);
-      var d = localStorage.getItem('descAct'+i);
-      var c = localStorage.getItem('catAct'+i);
-      this.addAct(new Activity(l,d,this.getCatString(c)));
-    }
-    this.rajoutDurees();
     return this.allActivities;
   }
 
@@ -52,18 +37,15 @@ export class DataService{
     this.allActivities.push(act);
   }
 
-  getCatString(nom:string):Category{
-    for (var i=1; i<=parseInt(localStorage.getItem('nbCategorie'),10);i++){
-      var l = localStorage.getItem('libelleCat'+i);
-      var c = localStorage.getItem('colorCat'+i);
-      var h = localStorage.getItem('htmlCat'+i);
-      if(l === nom){
-        return new Category(l,new Color(c,h));
+  private getCatString(nom:string):Category{
+    for(var i = 0; i<this.allCategories.length;i++){
+      if(this.allCategories[i].libelle === nom){
+        return this.allCategories[i];
       }
     }
   }
 
-  rajoutDurees():void{
+  private rajoutDurees():void{
     for (var i=1; i<=parseInt(localStorage.getItem('nbAct'),10);i++){
       var a = localStorage.getItem('nomAct'+i);
       for( var j = 1; j<=parseInt(localStorage.getItem('nbdurees'+a));j++){
@@ -79,7 +61,7 @@ export class DataService{
     }
   }
 
-  getPosAct(nom:string):number{
+  private getPosAct(nom:string):number{
     for(var i = 0; i<this.allActivities.length;i++){
       if(this.allActivities[i].nom === nom){
         return i;
@@ -90,11 +72,31 @@ export class DataService{
   getActivitiesByCategory(id:number):Activity[]{
     var tab:Activity[] = [];
     for(var i=0;i<this.allActivities.length;i++){
-      if(id == this.allActivities[i].category.id){
+      if(id === this.allActivities[i].category.id){
         tab.push(this.allActivities[i]);
       }
     }
     return tab;
+  }
+
+  initialiseCategorie() {
+    for (var i = 1; i <= parseInt(localStorage.getItem('nbCategorie'), 10); i++) {
+      var l = localStorage.getItem('libelleCat' + i);
+      var c = localStorage.getItem('colorCat' + i);
+      var h = localStorage.getItem('htmlCat' + i);
+      var id = localStorage.getItem('id'+i);
+      this.addCat(new Category(l, new Color(c, h),parseInt(id,10)));
+    }
+  }
+
+  initialiseActivite(){
+    for(var i=1; i<=parseInt(localStorage.getItem('nbAct'),10);i++){
+      var l = localStorage.getItem('nomAct'+i);
+      var d = localStorage.getItem('descAct'+i);
+      var c = localStorage.getItem('catAct'+i);
+      this.addAct(new Activity(l,d,this.getCatString(c)));
+    }
+    this.rajoutDurees();
   }
 
 }

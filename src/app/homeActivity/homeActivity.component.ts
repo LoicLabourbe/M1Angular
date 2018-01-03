@@ -26,7 +26,7 @@ export class HomeActivityComponent implements OnInit {
       this.id = params.id;
     });
     this.allActivities=this.dataService.getActivitiesByCategory(this.id);
-    if(this.allActivities.length == 0){
+    if(this.allActivities.length === 0){
       this.title = 'Aucune activité pour cette catégorie';
       this.nomCategorie = '';
     }else{
