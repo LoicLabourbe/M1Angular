@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import {Duree} from '../Classes/duree';
 import {Activity} from '../Classes/activity';
 import {Category} from '../Classes/category';
 import {DataService} from '../services/data.service';
-import {isBoolean} from 'util';
+import {Color} from '../Classes/color';
+import {leave} from '@angular/core/src/profile/wtf_impl';
+import {exitCodeFromResult} from '@angular/compiler-cli';
 
 @Component({
   selector: 'app-graphiques',
@@ -12,19 +13,27 @@ import {isBoolean} from 'util';
 })
 export class GraphiquesComponent implements OnInit {
 
-  listeDurees:number[];
+  listeDurees:number[]=[];
+  listeCouleurs:Color[]=[];
   allActivity:Activity[];
+  listeActivitees:string[]=[];
   allCategories:Category[];
   catego:Category;
-  id:number;
   name:string;
   found:Boolean;
   dureeTotal:number=0;
+  pieChartType:string = 'pie';
 
   constructor(private dataService:DataService) { }
 
   ngOnInit() {
     this.allCategories=this.dataService.getCategories();
+  }
+
+  reset():void{
+    this.listeCouleurs=[];
+    this.listeActivitees=[];
+    this.listeDurees=[];
   }
 
   selecCat(name:string):void{
@@ -35,12 +44,14 @@ export class GraphiquesComponent implements OnInit {
         this.catego = this.allCategories[i];
         this.allActivity = this.dataService.getActivitiesByCategory(this.catego.id);
         if(this.allActivity.length === 0){
-          alert("Aucune Activitées.");
+          alert('Aucune Activitées.');
         } else {
           for (var j =0; j < this.allActivity.length; j++) {
             this.dureeTotal=0;
+            this.listeActivitees[j]=this.allActivity[j].nom;
+            this.listeCouleurs[j]=this.allActivity[j].category.color;
             for(var k =0;k<this.allActivity[j].mesDurees.length;k++){
-              this.dureeTotal += Number(this.allActivity[j].mesDurees[k]);
+              this.dureeTotal += this.allActivity[j].mesDurees[k].secondsPassed;
             }
             this.listeDurees[j] = this.dureeTotal;
           }
@@ -48,8 +59,7 @@ export class GraphiquesComponent implements OnInit {
       }
     }
     if(this.found === false){
-      alert("Categorie inconnue.");
+      alert('Categorie inconnue.');
     }
   }
-
 }
