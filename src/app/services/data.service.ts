@@ -1,6 +1,5 @@
 import {Injectable} from '@angular/core';
 import {Category} from '../Classes/category';
-import {COLORS} from '../const/availableColors';
 import {Activity} from '../Classes/activity';
 import {Color} from '../Classes/color';
 import {Duree} from '../Classes/duree';
@@ -38,7 +37,7 @@ export class DataService{
   }
 
   private getCatString(nom:string):Category{
-    for(var i = 0; i<this.allCategories.length;i++){
+    for(let i = 0; i<this.allCategories.length; i++){
       if(this.allCategories[i].libelle === nom){
         return this.allCategories[i];
       }
@@ -46,13 +45,13 @@ export class DataService{
   }
 
   private rajoutDurees():void{
-    for (var i=1; i<=parseInt(localStorage.getItem('nbAct'),10);i++){
-      var a = localStorage.getItem('nomAct'+i);
-      for( var j = 1; j<=parseInt(localStorage.getItem('nbdurees'+a));j++){
-        var s = localStorage.getItem('startDuree'+a+j);
-        var e = localStorage.getItem('endDuree'+a+j);
-        var d = localStorage.getItem('Duree'+a+j);
-        var durees = new Duree();
+    for (let i=1; i<=parseInt(localStorage.getItem('nbAct'),10); i++){
+      const a = localStorage.getItem('nomAct' + i);
+      for(let j = 1; j<=parseInt(localStorage.getItem('nbdurees'+a)); j++){
+        const s = localStorage.getItem('startDuree' + a + j);
+        const e = localStorage.getItem('endDuree' + a + j);
+        const d = localStorage.getItem('Duree' + a + j);
+        const durees = new Duree();
         durees.start = new Date(parseInt(s,10));
         durees.end = new Date(parseInt(e,10));
         durees.secondsPassed = parseInt(d,10);
@@ -62,7 +61,7 @@ export class DataService{
   }
 
   private getPosAct(nom:string):number{
-    for(var i = 0; i<this.allActivities.length;i++){
+    for(let i = 0; i<this.allActivities.length; i++){
       if(this.allActivities[i].nom === nom){
         return i;
       }
@@ -70,8 +69,8 @@ export class DataService{
   }
 
   getActivitiesByCategory(id:number):Activity[]{
-    var tab:Activity[] = [];
-    for(var i=0;i<this.getActivities().length;i++){
+    const tab: Activity[] = [];
+    for(let i=0; i<this.getActivities().length; i++){
       if(id == this.getActivities()[i].category.id){
         tab.push(this.getActivities()[i]);
       }
@@ -80,8 +79,8 @@ export class DataService{
   }
 
   getCategoryById(id:number):Category{
-    var cat:Category = null;
-    for(var i=0;i<this.getCategories().length;i++){
+    let cat: Category = null;
+    for(let i=0; i<this.getCategories().length; i++){
       if(id == this.getCategories()[i].id){
         cat = this.getCategories()[i];
       }
@@ -90,20 +89,20 @@ export class DataService{
   }
 
   initialiseCategorie() {
-    for (var i = 1; i <= parseInt(localStorage.getItem('nbCategorie'), 10); i++) {
-      var l = localStorage.getItem('libelleCat' + i);
-      var c = localStorage.getItem('colorCat' + i);
-      var h = localStorage.getItem('htmlCat' + i);
-      var id = localStorage.getItem('id'+i);
+    for (let i = 1; i <= parseInt(localStorage.getItem('nbCategorie'), 10); i++) {
+      const l = localStorage.getItem('libelleCat' + i);
+      const c = localStorage.getItem('colorCat' + i);
+      const h = localStorage.getItem('htmlCat' + i);
+      const id = localStorage.getItem('id' + i);
       this.addCat(new Category(l, new Color(c, h),parseInt(id,10)));
     }
   }
 
   initialiseActivite(){
-    for(var i=1; i<=parseInt(localStorage.getItem('nbAct'),10);i++){
-      var l = localStorage.getItem('nomAct'+i);
-      var d = localStorage.getItem('descAct'+i);
-      var c = localStorage.getItem('catAct'+i);
+    for(let i=1; i<=parseInt(localStorage.getItem('nbAct'),10); i++){
+      const l = localStorage.getItem('nomAct' + i);
+      const d = localStorage.getItem('descAct' + i);
+      const c = localStorage.getItem('catAct' + i);
       this.addAct(new Activity(l,d,this.getCatString(c)));
     }
     this.rajoutDurees();

@@ -27,8 +27,8 @@ export class HomeActivityComponent implements OnInit {
       this.id = params['id'];
     });
     this.nomCategorie = this.dataService.getCategoryById(this.id).libelle;
-    var length = this.dataService.getActivitiesByCategory(this.id).length;
-    for(var i=0;i<length;i++) {
+    let length = this.dataService.getActivitiesByCategory(this.id).length;
+    for(let i=0; i<length; i++) {
       this.allActivities.push(this.dataService.getActivitiesByCategory(this.id)[i]);
     }
     if(this.allActivities.length === 0){
