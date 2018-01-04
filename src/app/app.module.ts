@@ -14,6 +14,7 @@ import {AppRoutingModule} from './app-routing.module';
 import {CategoryComponent} from './category/category.component';
 import {HomeActivityComponent} from './homeActivity/homeActivity.component';
 import {HomeCategoryComponent} from './homeCategory/homeCategory.component';
+import { GraphiquesComponent } from './graphiques/graphiques.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,8 @@ import {HomeCategoryComponent} from './homeCategory/homeCategory.component';
     HomeComponent,
     CategoryComponent,
     HomeActivityComponent,
-    HomeCategoryComponent
+    HomeCategoryComponent,
+    GraphiquesComponent
   ],
   imports: [
     BrowserModule,

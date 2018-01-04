@@ -5,6 +5,7 @@ import {HomeComponent} from './home/home.component';
 import {FormulaireCategoryComponent} from './formulaire-category/formulaire-category.component';
 import {HomeActivityComponent} from './homeActivity/homeActivity.component';
 import {HomeCategoryComponent} from './homeCategory/homeCategory.component';
+import {GraphiquesComponent} from './graphiques/graphiques.component';
 
 const routes: Routes =[
   {path: '', redirectTo: '/home', pathMatch: 'full'},
@@ -12,7 +13,8 @@ const routes: Routes =[
   {path:'formulaireCategory',component:FormulaireCategoryComponent},
   {path:'formulaireActivite',component:FormulaireActiviteComponent},
   {path:'homeActivity/:id',component:HomeActivityComponent},
-  {path:'homeCategory',component:HomeCategoryComponent}
+  {path:'homeCategory',component:HomeCategoryComponent},
+  {path:'graphiques',component:GraphiquesComponent}
 ];
 
 @NgModule({

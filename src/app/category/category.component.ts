@@ -26,4 +26,5 @@ export class CategoryComponent implements OnInit {
     this.id=this.myCategory.id;
   }
 
+
 }
