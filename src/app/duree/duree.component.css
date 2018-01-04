@@ -1,0 +1,9 @@
+.timer{
+  position: relative;
+}
+
+.history{
+  position: relative;
+  bottom: 1px;
+  right:1px;
+}

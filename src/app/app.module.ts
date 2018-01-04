@@ -15,6 +15,8 @@ import {CategoryComponent} from './category/category.component';
 import {HomeActivityComponent} from './homeActivity/homeActivity.component';
 import {HomeCategoryComponent} from './homeCategory/homeCategory.component';
 import { GraphiquesComponent } from './graphiques/graphiques.component';
+import {SecondPassedPipe} from "./pipe/secondPassed.pipe";
+
 
 @NgModule({
   declarations: [
@@ -27,7 +29,8 @@ import { GraphiquesComponent } from './graphiques/graphiques.component';
     CategoryComponent,
     HomeActivityComponent,
     HomeCategoryComponent,
-    GraphiquesComponent
+    GraphiquesComponent,
+    SecondPassedPipe
   ],
   imports: [
     BrowserModule,

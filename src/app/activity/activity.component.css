@@ -1,0 +1,18 @@
+.activity{
+  position: relative;
+  width: 500px;
+  border-radius: 8px;
+  padding: 2px;
+  margin: 3px;
+}
+
+.activity:hover{
+  opacity: 0.8;
+}
+
+.duree {
+  height: inherit;
+  position: absolute;
+  top: 5px;
+  right: 5px;
+}

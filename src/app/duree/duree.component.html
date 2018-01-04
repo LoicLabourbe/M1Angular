@@ -1,6 +1,17 @@
-<p *ngIf="duree.secondsPassed!=0">
-  Timer: {{duree.secondsPassed}}
-</p>
+<div *ngIf="duree.secondsPassed!=0" class="timer">
+    {{duree.secondsPassed | toTimer}}
+</div>
+
+<div class="history">
+  <span *ngIf="duree.start">
+  {{duree.start | date: 'HH:mm:ss'}}
+  </span>
+
+  <span *ngIf="duree.end">
+    <span> - </span>
+    {{duree.end | date: 'HH:mm:ss'}}
+  </span>
+</div>
 
 
 
