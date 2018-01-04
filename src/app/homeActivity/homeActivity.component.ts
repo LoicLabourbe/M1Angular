@@ -22,15 +22,17 @@ export class HomeActivityComponent implements OnInit {
   constructor(private dataService:DataService,private route:ActivatedRoute) { }
 
   ngOnInit() {
+    this.allActivities = [];
     this.route.params.subscribe(params => {
       this.id = params['id'];
     });
-    this.allActivities=this.dataService.getActivitiesByCategory(this.id);
+    this.nomCategorie = this.dataService.getCategoryById(this.id).libelle;
+    var length = this.dataService.getActivitiesByCategory(this.id).length;
+    for(var i=0;i<length;i++) {
+      this.allActivities.push(this.dataService.getActivitiesByCategory(this.id)[i]);
+    }
     if(this.allActivities.length === 0){
-      this.title = 'Aucune activité pour cette catégorie';
-      this.nomCategorie = '';
-    }else{
-      this.nomCategorie = this.allActivities[0].category.libelle;
+      this.title = 'Aucune activité pour la catégorie : ';
     }
   }
 
