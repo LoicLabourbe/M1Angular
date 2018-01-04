@@ -1,13 +1,27 @@
 .activity{
   position: relative;
   width: 500px;
+  height: 100px;
   border-radius: 8px;
   padding: 2px;
   margin: 3px;
+
+  border-width: thin;
+  border-color: dimgray;
+  border-style: solid;
 }
 
 .activity:hover{
-  opacity: 0.8;
+  opacity: 0.85;
+  width: 515px;
+  height: 110px;
+}
+
+.activity-title{
+  position: relative;
+  top: inherit;
+  left: inherit;
+  margin-left: 3px;
 }
 
 .duree {
