@@ -1,30 +1,19 @@
 <h3> Graphiques </h3>
+  <div>
+    <fieldset class="left">
+      <div>
+         <label>Nom de la catégorie voulu : </label>
+         <input type="text" [(ngModel)]="name">
+      </div>
+      <button id="val" (click)="selecCat(name)">Valider</button>
+      <button (click)="reset()">Reset</button>
 
-<div>
-    <label>Nom de la catégorie voulu : </label>
-    <input type="text" [(ngModel)]="name">
-</div>
-<div>
-  <button id="val" (click)="selecCat(name)">Valider</button>
-  <button (click)="reset()">Reset</button>
-</div>
-
-<div id="chart" *ngIf="listeDurees+listeActivitees">
-  <canvas baseChart
-          [data]="listeDurees"
-          [labels]="listeActivitees"
-          [chartType]="pieChartType"></canvas>
-</div>
-
-<div *ngIf="listeDurees">
-  <ul>
-    <li *ngFor="let time of listeDurees">
-      <p>
-        {{time}};
-      </p>
-    </li>
-  </ul>
-</div>
-
-
-
+     </fieldset>
+  </div>
+  <div class="right" id="chart" *ngIf="listeDurees+listeActivitees">
+    <canvas baseChart
+            [data]="listeDurees"
+            [labels]="listeActivitees"
+            [chartType]="pieChartType">
+    </canvas>
+  </div>

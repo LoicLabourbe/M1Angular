@@ -2,3 +2,28 @@
   display: block;
   width: 50%;
 }
+
+button {
+  color: white;
+  background-color: #009cba;
+  margin: 2px;
+  border: darkslategrey;
+  border-style: none;
+  border-width: thin;
+  padding: 11px 16px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  border-radius: 10px;
+}
+
+button:hover{
+  border-style: solid;
+}
+
+fieldset {
+  width: 300px;
+  margin: 2px;
+  border-color: #008CBA; /* Blue */
+}
