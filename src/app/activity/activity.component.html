@@ -1,20 +1,26 @@
-<h3>
-  Activité: {{nom }}
-</h3>
-<p>
-  Description de l'activité: {{description}}
-</p>
-<div *ngIf="mesDurees">
-  <ul>
-    <li *ngFor="let duree of mesDurees">
-      <p>
-        Debut: {{duree.start | date: 'dd/MM/yyyy HH:mm:ss'}}
-        Fin: {{duree.end | date: 'dd/MM/yyyy HH:mm:ss'}}
-        Durée: {{duree.secondsPassed}}
-      </p>
-    </li>
-  </ul>
+<div (click)="clickActivity()" class="activity" [ngStyle]="{'background':category.color.htmlCode}">
+
+  <div class="activity-title">
+    <h3>
+      {{nom}}
+    </h3>
+  </div>
+  <p>
+    {{description}}
+  </p>
+  <!--
+  <div *ngIf="mesDurees">
+    <ul>
+      <li *ngFor="let duree of mesDurees">
+        <p>
+          Debut: {{duree.start | date: 'dd/MM/yyyy HH:mm:ss'}}
+          Fin: {{duree.end | date: 'dd/MM/yyyy HH:mm:ss'}}
+          Durée: {{duree.secondsPassed}}
+        </p>
+      </li>
+    </ul>
+  </div>
+  -->
+  <app-duree [duree]="duree" class="duree"></app-duree>
 </div>
-<app-duree [duree]="duree"></app-duree>
-<button (click)="start()">Start</button>
-<button (click)="stop()">Stop</button>
+
