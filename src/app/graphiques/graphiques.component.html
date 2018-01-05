@@ -9,11 +9,10 @@
   <button (click)="reset()">Reset</button>
 </div>
 
-<div id="chart" *ngIf="listeDurees+listeActivitees+listeCouleurs">
+<div id="chart" *ngIf="listeDurees+listeActivitees">
   <canvas baseChart
           [data]="listeDurees"
           [labels]="listeActivitees"
-          [colors]="listeCouleurs"
           [chartType]="pieChartType"></canvas>
 </div>
 

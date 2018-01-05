@@ -15,7 +15,9 @@ import {CategoryComponent} from './category/category.component';
 import {HomeActivityComponent} from './homeActivity/homeActivity.component';
 import {HomeCategoryComponent} from './homeCategory/homeCategory.component';
 import { GraphiquesComponent } from './graphiques/graphiques.component';
-import { ChartsModule } from 'ng2-charts/ng2-charts';
+import {SecondPassedPipe} from "./pipe/secondPassed.pipe";
+import {ChartsModule} from 'ng2-charts';
+
 
 @NgModule({
   declarations: [
@@ -28,7 +30,8 @@ import { ChartsModule } from 'ng2-charts/ng2-charts';
     CategoryComponent,
     HomeActivityComponent,
     HomeCategoryComponent,
-    GraphiquesComponent
+    GraphiquesComponent,
+    SecondPassedPipe
   ],
   imports: [
     BrowserModule,
