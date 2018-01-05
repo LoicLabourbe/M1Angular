@@ -1,3 +1,7 @@
+.divhr{
+  width: 676px;
+}
+
 .application-title{
   background-color:	#396a93; /* Green */
   border: none;
@@ -28,6 +32,19 @@
   opacity: 0.8;
 }
 
+.application-title:hover{
+  opacity: 0.8;
+}
+
 .buttons{
   width: 800px;
 }
+
+.buttonClicked {
+  padding: 17px 34px;
+  border-style: solid;
+  border-color: black;
+  border-width: 1px;
+}
+
+

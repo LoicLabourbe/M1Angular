@@ -1,21 +1,25 @@
 <div>
-  <h4>Création d'une nouvelle catégorie</h4>
 
-  <!-- Libellé -->
-  <div>
-    <label>Libellé</label>
-    <input type="text" [(ngModel)]="libelle" >
-  </div>
+  <fieldset>
 
+    <legend>Nouvelle catégorie</legend>
 
-<!--Code  -->
-  <div>
-    <label>Couleur</label>
-    <select [(ngModel)]="color">
-      <option *ngFor="let color of possibleColors" [ngValue]="color">{{color.libelle}}</option>
-    </select>
-  </div>
+    <!-- Libellé -->
+    <div>
+      <label>Libellé</label>
+      <input type="text" [(ngModel)]="libelle" required autofocus>
+    </div>
 
+    <!--Code  -->
+    <div>
+      <label>Couleur</label>
+      <select [(ngModel)]="color">
+        <option *ngFor="let color of possibleColors" [ngValue]="color">{{color.libelle}}</option>
+      </select>
+    </div>
 
-<a routerLink="/home"><button (click)="ajouterCategory(libelle,color)">Valider</button></a>
+  </fieldset>
+
+  <a routerLink="/home"><button (click)="ajouterCategory(libelle,color)">Valider</button></a>
+
 </div>

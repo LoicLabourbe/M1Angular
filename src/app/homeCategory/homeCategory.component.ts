@@ -12,8 +12,6 @@ import {Category} from '../Classes/category';
 
 export class HomeCategoryComponent implements OnInit {
 
-
-  title = 'Catégories';
   allActivities:Activity[];
   allCategories:Category[];
 

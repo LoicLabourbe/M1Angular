@@ -12,7 +12,10 @@ export class AppComponent implements OnInit{
 
   constructor(private dataService:DataService, private router: Router) { }
 
+  actualMenu:string;
+
   ngOnInit(){
+    this.actualMenu="home";
     if (localStorage.getItem('nbCategorie') === null)
     {
       localStorage.setItem('nbCategorie','0');
@@ -27,6 +30,13 @@ export class AppComponent implements OnInit{
 
   goHome():void{
     this.router.navigate(['/home']);
+    this.actualMenu="home";
+  }
+
+  changeActualMenu(menu:string):void{
+    this.actualMenu=menu;
+    console.log("actual menu="+this.actualMenu);
+
   }
 
 }
