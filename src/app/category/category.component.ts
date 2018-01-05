@@ -1,7 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {Category} from '../Classes/category';
 import {Color} from '../Classes/color';
-
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-category',
@@ -17,7 +17,7 @@ export class CategoryComponent implements OnInit {
   couleur:Color;
   id:number;
 
-  constructor() {
+  constructor(private router: Router) {
   }
 
   ngOnInit() {
@@ -26,5 +26,8 @@ export class CategoryComponent implements OnInit {
     this.id=this.myCategory.id;
   }
 
+  goToDetail():void{
+    this.router.navigate(['/homeActivity', this.id]);
+  }
 
 }

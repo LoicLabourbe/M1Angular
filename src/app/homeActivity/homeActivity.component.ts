@@ -13,7 +13,7 @@ import { ActivatedRoute} from '@angular/router';
 export class HomeActivityComponent implements OnInit {
 
 
-  title = 'Menu de la catégorie : ';
+  title = 'Catégorie : ';
   allActivities:Activity[];
   nomCategorie:string;
   id:number;

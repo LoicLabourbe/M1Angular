@@ -13,7 +13,7 @@ import {Category} from '../Classes/category';
 export class HomeCategoryComponent implements OnInit {
 
 
-  title = 'Menu de l\'application';
+  title = 'Catégories';
   allActivities:Activity[];
   allCategories:Category[];
 

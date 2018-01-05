@@ -1,5 +1,6 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {DataService} from './services/data.service';
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-root',
@@ -9,7 +10,7 @@ import {DataService} from './services/data.service';
 export class AppComponent implements OnInit{
   title = 'Application de gestion de temps';
 
-  constructor(private dataService:DataService) { }
+  constructor(private dataService:DataService, private router: Router) { }
 
   ngOnInit(){
     if (localStorage.getItem('nbCategorie') === null)
@@ -22,6 +23,10 @@ export class AppComponent implements OnInit{
     }
     this.dataService.initialiseCategorie();
     this.dataService.initialiseActivite();
+  }
+
+  goHome():void{
+    this.router.navigate(['/home']);
   }
 
 }
