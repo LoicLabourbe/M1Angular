@@ -14,7 +14,7 @@
     <div>
       <label>Couleur</label>
       <select [(ngModel)]="color">
-        <option *ngFor="let color of possibleColors" [ngValue]="color">{{color.libelle}}</option>
+        <option *ngFor="let color of possibleColors" [ngValue]="color" [ngStyle]="{'background':color.htmlCode}">{{color.libelle}}</option>
       </select>
     </div>
 
