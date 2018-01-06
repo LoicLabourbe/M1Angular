@@ -84,6 +84,6 @@ export class GraphiquesComponent implements OnInit {
       for(let m=0;m<this.listeDurees.length;m++){
         this.percentage[m]=Math.round((this.listeDurees[m]/this.dureeTOTAL)*100);
       }
-    }, 1);
+    }, 0.001);
   }
 }

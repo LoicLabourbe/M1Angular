@@ -13,9 +13,6 @@
           <option *ngFor="let temps of tempsStart" [ngValue]="temps">{{temps | toTimer}}</option>
         </select>
       </div>
-
-      <button (click)="selecCat(catego.libelle)">Valider</button>
-      <button (click)="reset()">Reset</button>
      </fieldset>
   </div>
     <div id="chart" *ngIf="waiter">
