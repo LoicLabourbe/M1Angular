@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {Activity} from '../Classes/activity';
 import {Category} from '../Classes/category';
 import {DataService} from '../services/data.service';
+import {Duree} from '../Classes/duree';
 
 @Component({
   selector: 'app-graphiques',
@@ -11,11 +12,17 @@ import {DataService} from '../services/data.service';
 export class GraphiquesComponent implements OnInit {
 
   listeDurees:number[]=[];
+  percentage:number[]=[];
+  tempsStart:Date[]=[];
+  temps:Date;
+  duree:Duree;
+  activity:Activity;
   allActivity:Activity[];
   listeActivitees:string[]=[];
   allCategories:Category[];
   catego:Category;
   dureeTotal:number=0;
+  dureeTOTAL:number=0;
   waiter:Boolean;
   pieChartType:string = 'pie';
 
@@ -28,6 +35,14 @@ export class GraphiquesComponent implements OnInit {
   reset():void{
     this.listeDurees=[];
   }
+
+  getDurees(name:Category):void{
+    this.allActivity = this.dataService.getActivitiesByCategory(name.id);
+    for(let t=0;t<this.allActivity.length;t++){
+        this.tempsStart[t] = this.allActivity[t].duree.start;
+    }
+  }
+
 
   selecCat(name:string):void{
     this.waiter=false;
@@ -48,10 +63,15 @@ export class GraphiquesComponent implements OnInit {
               this.dureeTotal += this.allActivity[j].mesDurees[k].secondsPassed;
             }
             this.listeDurees[j] = this.dureeTotal;
+            this.dureeTOTAL+=this.dureeTotal;
           }
         }
       }
     }
     this.waiter=true;
+    //--- Affichage des pourcentages---//
+    for(let m=0;m<this.listeDurees.length;m++){
+      this.percentage[m]=Math.round((this.listeDurees[m]/this.dureeTOTAL)*100);
+    }
   }
 }
