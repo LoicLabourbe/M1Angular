@@ -1,16 +1,16 @@
-<h3> Graphiques </h3>
-  <div>
-    <fieldset class="left">
-      <div>
-         <label>Nom de la catégorie voulu : </label>
-         <input type="text" [(ngModel)]="name">
-      </div>
-      <button id="val" (click)="selecCat(name)">Valider</button>
-      <button (click)="reset()">Reset</button>
 
+  <div>
+    <fieldset>
+      <legend>Historique</legend>
+      <div>
+        <button (click)="selecCat(catego.libelle)">Valider2</button>
+        <select [(ngModel)]="catego">
+          <option *ngFor="let catego of allCategories" [ngValue]="catego">{{catego.libelle}}</option>
+        </select>
+      </div>
      </fieldset>
   </div>
-  <div class="right" id="chart" *ngIf="listeDurees+listeActivitees">
+  <div id="chart" *ngIf="waiter===true">
     <canvas baseChart
             [data]="listeDurees"
             [labels]="listeActivitees"
