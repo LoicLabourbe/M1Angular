@@ -25,6 +25,9 @@ export class GraphiquesComponent implements OnInit {
   dureeTOTAL:number=0;
   waiter:Boolean;
   pieChartType:string = 'pie';
+  pieChartOptions:any = {
+    animation: false
+  };
 
   constructor(private dataService:DataService) { }
 
@@ -34,9 +37,19 @@ export class GraphiquesComponent implements OnInit {
 
   reset():void{
     this.listeDurees=[];
+    this.dureeTOTAL=0;
+    this.percentage=[];
+    this.listeActivitees=[];
+    this.catego=null;
+    this.allActivity=[];
+    this.waiter=false;
+    this.tempsStart=[];
   }
 
   getDurees(name:Category):void{
+    if(this.tempsStart!=[]){
+      this.tempsStart=[];
+    }
     this.allActivity = this.dataService.getActivitiesByCategory(name.id);
     for(let t=0;t<this.allActivity.length;t++){
         this.tempsStart[t] = this.allActivity[t].duree.start;
@@ -46,32 +59,31 @@ export class GraphiquesComponent implements OnInit {
 
   selecCat(name:string):void{
     this.waiter=false;
-    if(this.listeActivitees != []){
-      this.reset();
-    }
-    for(let i = 0; i<this.allCategories.length; i++){
-      if(this.allCategories[i].libelle === name){
-        this.catego = this.allCategories[i];
-        this.allActivity = this.dataService.getActivitiesByCategory(this.catego.id);
-        if(this.allActivity.length === 0){
-          alert('Aucune Activitées.');
-        } else {
-          for (let j =0; j < this.allActivity.length; j++) {
-            this.dureeTotal=0;
-            this.listeActivitees[j]=this.allActivity[j].nom;
-            for(let k =0; k<this.allActivity[j].mesDurees.length; k++){
-              this.dureeTotal += this.allActivity[j].mesDurees[k].secondsPassed;
+    setTimeout(()=>{this.reset();
+      for(let i = 0; i<this.allCategories.length; i++){
+        if(this.allCategories[i].libelle === name){
+          this.catego = this.allCategories[i];
+          this.allActivity = this.dataService.getActivitiesByCategory(this.catego.id);
+          if(this.allActivity.length === 0){
+            alert('Aucune Activitées.');
+          } else {
+            for (let j =0; j < this.allActivity.length; j++) {
+              this.dureeTotal=0;
+              this.listeActivitees[j]=this.allActivity[j].nom;
+              for(let k =0; k<this.allActivity[j].mesDurees.length; k++){
+                this.dureeTotal += this.allActivity[j].mesDurees[k].secondsPassed;
+              }
+              this.listeDurees[j] = this.dureeTotal;
+              this.dureeTOTAL+=this.dureeTotal;
             }
-            this.listeDurees[j] = this.dureeTotal;
-            this.dureeTOTAL+=this.dureeTotal;
           }
         }
       }
-    }
-    this.waiter=true;
-    //--- Affichage des pourcentages---//
-    for(let m=0;m<this.listeDurees.length;m++){
-      this.percentage[m]=Math.round((this.listeDurees[m]/this.dureeTOTAL)*100);
-    }
+      this.waiter=true;
+      //--- Affichage des pourcentages---//
+      for(let m=0;m<this.listeDurees.length;m++){
+        this.percentage[m]=Math.round((this.listeDurees[m]/this.dureeTOTAL)*100);
+      }
+    }, 1);
   }
 }

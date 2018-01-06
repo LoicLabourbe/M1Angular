@@ -3,28 +3,30 @@
     <fieldset>
       <legend>Historique</legend>
       <div>
-        <select (click)="getDurees(catego)"[(ngModel)]="catego">
+        <select (click)="getDurees(catego);selecCat(catego.libelle)"[(ngModel)]="catego">
           <option  *ngFor="let catego of allCategories" [ngValue]="catego">{{catego.libelle}}</option>
         </select>
       </div>
 
       <div>
-        <select  *ngIf="tempsStart+listeActivitees" [(ngModel)]="temps">
-          <option *ngFor="let temps of tempsStart" [ngValue]="temps">{{temps}}</option>
+        <select  *ngIf="tempsStart" [(ngModel)]="temps">
+          <option *ngFor="let temps of tempsStart" [ngValue]="temps">{{temps | toTimer}}</option>
         </select>
       </div>
 
       <button (click)="selecCat(catego.libelle)">Valider</button>
+      <button (click)="reset()">Reset</button>
      </fieldset>
   </div>
+    <div id="chart" *ngIf="waiter">
+      <fieldset>
+        <canvas baseChart
+                [data]="percentage"
+                [labels]="listeActivitees"
+                [options]="pieChartOptions"
+                [chartType]="pieChartType">
+        </canvas>
+      </fieldset>
+    </div>
 
-  <div class="chart" *ngIf="waiter===true">
-    <fieldset>
-      <canvas baseChart
-              [data]="percentage"
-              [labels]="listeActivitees"
-              [chartType]="pieChartType">
-      </canvas>
-    </fieldset>
-  </div>
 
