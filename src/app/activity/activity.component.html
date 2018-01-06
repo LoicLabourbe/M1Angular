@@ -1,13 +1,16 @@
 <div (click)="clickActivity()" class="activity" [ngStyle]="{'background':category.color.htmlCode}">
 
-  <div class="activity-title">
-    <h3>
+  <div class="activity-div">
+    <h3 class="activity-title">
       {{nom}}
     </h3>
   </div>
-  <p>
-    {{description}}
-  </p>
+  <div class="description">
+    <p>
+      {{description}}
+    </p>
+  </div>
+
   <!--
   <div *ngIf="mesDurees">
     <ul>

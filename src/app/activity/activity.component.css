@@ -17,16 +17,29 @@
   height: 110px;
 }
 
-.activity-title{
+.activity-div{
+  display: inline-block;
   position: relative;
   top: inherit;
   left: inherit;
   margin-left: 3px;
 }
 
+.activity-title{
+  position: relative;
+  padding: 4px;
+  display: inline-block;
+  background:rgba(255,255,255, 0.4);
+  border-radius: 8px;
+  border-style: solid;
+  border-width: thin;
+}
+
 .duree {
-  height: inherit;
+  height: 95px;
+  width: 150px;
   position: absolute;
   top: 5px;
   right: 5px;
 }
+

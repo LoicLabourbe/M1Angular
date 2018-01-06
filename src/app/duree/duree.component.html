@@ -1,11 +1,8 @@
-<div>
-  <fieldset class="globe">
-    <div *ngIf="duree.secondsPassed!=0" class="timer">
-      {{duree.secondsPassed | toTimer}}
-    </div>
-  </fieldset>
+<div *ngIf="duree.secondsPassed!=0" class="timer">
+  {{duree.secondsPassed | toTimer}}
 </div>
-<div class="history">
+
+<div class="history" *ngIf="duree.start">
   <span *ngIf="duree.start">
   {{duree.start | date: 'HH:mm:ss'}}
   </span>

@@ -1,15 +1,19 @@
 .timer{
-  position: center;
   text-align: center;
+  position: absolute;
+  border-radius: 6px;
+  width: 70px;
+  right: 0px;
+  background:rgba(255,255,255, 0.4);
 }
 
-.globe{
-  border-radius: 8px;
-  background: white;
-}
 
 .history{
-  position: relative;
-  bottom: 1px;
-  right:1px;
+  text-align: center;
+  position: absolute;
+  border-radius: 6px;
+  bottom: 0px;
+  right:0px;
+  padding: 2px;
+  background:rgba(255,255,255, 0.4);
 }

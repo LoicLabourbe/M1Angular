@@ -6,6 +6,6 @@ export class SecondPassedPipe implements PipeTransform{
     let hour=Math.trunc(value/3600);
     let min=Math.trunc(value/60);
     let seconds=value%60;
-    return (hour>9?hour:"0"+hour)+":"+(min>9?min:"0"+min)+":"+(seconds>9?seconds:"0"+seconds);
+    return hour+":"+(min>9?min:"0"+min)+":"+(seconds>9?seconds:"0"+seconds);
   }
 }
