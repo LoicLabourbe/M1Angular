@@ -1,5 +1,11 @@
 .timer{
-  position: relative;
+  position: center;
+  text-align: center;
+}
+
+.globe{
+  border-radius: 8px;
+  background: white;
 }
 
 .history{
