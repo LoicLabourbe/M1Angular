@@ -22,13 +22,20 @@ button:hover{
   border-style: solid;
 }
 
-fieldset {
+.fielglob {
   padding: 15px 32px;
-  margin:  10px  0px  10px 0px;
+  margin:  10px  0 10px 0;
   text-align: center;
   text-decoration: none;
   font-size: 20px;
   width: 613px;
   border-radius: 6px;
   border-color: #008CBA; /* Blue */
+}
+
+.rechercheA {
+  font-size: 20px;
+  text-align: center;
+  border-color: #008CBA;
+  border-radius: 6px;
 }

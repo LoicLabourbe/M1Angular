@@ -1,22 +1,28 @@
 
   <div>
-    <fieldset>
+    <fieldset class="fielglob">
       <legend>Historique</legend>
       <div>
-        <select (click)="getDurees(catego);selecCat(catego.libelle)"[(ngModel)]="catego">
-          <option  *ngFor="let catego of allCategories" [ngValue]="catego">{{catego.libelle}}</option>
-        </select>
+        <label>
+          <select (click)="getDurees(catego);selecCat(catego.libelle)" [(ngModel)]="catego">
+            <option *ngFor="let catego of allCategories" [ngValue]="catego">{{catego.libelle}}</option>
+          </select>
+        </label>
       </div>
-
-      <div>
-        <select  *ngIf="tempsStart" [(ngModel)]="temps">
-          <option *ngFor="let temps of tempsStart" [ngValue]="temps">{{temps | toTimer}}</option>
-        </select>
-      </div>
+      <fieldset class="rechercheA">
+        <legend>Recherche avancée</legend>
+        <div>
+          <label *ngIf="tempsStart"> Début
+            <select *ngIf="percentage" [(ngModel)]="temps">
+              <option *ngFor="let tps of tempsStart" [ngValue]="tps">{{tps | date:'dd/MM :: HH:mm:ss' }}</option>
+            </select>
+          </label>
+        </div>
+      </fieldset>
      </fieldset>
   </div>
     <div id="chart" *ngIf="waiter">
-      <fieldset>
+      <fieldset class="fielglob">
         <canvas baseChart
                 [data]="percentage"
                 [labels]="listeActivitees"
