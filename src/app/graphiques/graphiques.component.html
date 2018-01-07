@@ -4,18 +4,22 @@
       <legend>Historique</legend>
       <div>
         <label>
-          <select (click)="getDurees(catego);selecCat(catego.libelle)" [(ngModel)]="catego">
-            <option *ngFor="let catego of allCategories" [ngValue]="catego">{{catego.libelle}}</option>
-          </select>
+          <span>
+            <select class="select-style" (click)="getDurees(catego);selecCat(catego.libelle)" [(ngModel)]="catego">
+              <option *ngFor="let catego of allCategories" [ngValue]="catego">{{catego.libelle}}</option>
+            </select>
+          </span>
         </label>
       </div>
       <fieldset class="rechercheA">
         <legend>Recherche avancée</legend>
         <div>
           <label *ngIf="tempsStart"> Début
-            <select *ngIf="percentage" [(ngModel)]="temps">
-              <option *ngFor="let tps of tempsStart" [ngValue]="tps">{{tps | date:'dd/MM :: HH:mm:ss' }}</option>
-            </select>
+            <span>
+              <select class="select-style" *ngIf="percentage" [(ngModel)]="temps">
+                <option *ngFor="let tps of tempsStart" [ngValue]="tps">{{tps | date:'dd/MM :: HH:mm:ss' }}</option>
+              </select>
+            </span>
           </label>
         </div>
       </fieldset>

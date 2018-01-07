@@ -39,3 +39,32 @@ button:hover{
   border-color: #008CBA;
   border-radius: 6px;
 }
+
+.select-style {
+  width: 120px;
+  border-radius: 3px;
+  overflow: hidden;
+  border: 1px solid #008CBA;
+}
+
+.select-style select {
+  padding: 5px 8px;
+  width: 130%;
+  border: none;
+  border-color: #008CBA;
+  box-shadow: #009cba;
+  background: #008CBA;
+  background-image: none;
+  -webkit-appearance: none;
+}
+
+.select-style select:focus {
+  outline: none;
+  border-color: #008CBA;
+}
+
+option {
+  background: #008CBA;
+  color: white;
+}
+

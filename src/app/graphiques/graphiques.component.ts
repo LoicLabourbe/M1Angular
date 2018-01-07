@@ -98,7 +98,7 @@ export class GraphiquesComponent implements OnInit {
       this.waiter=true;
       //--- Affichage des pourcentages---//
       for(let m=0;m<this.listeDurees.length;m++){
-        this.percentage[m]=Math.round((this.listeDurees[m]/this.dureeTOTAL)*100);
+        this.percentage[m]=Math.round((this.listeDurees[m]/this.dureeTOTAL)*100*100)/100;
       }
     }, 0.001);
   }
