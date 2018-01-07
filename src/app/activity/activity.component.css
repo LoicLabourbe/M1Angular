@@ -43,3 +43,21 @@
   right: 5px;
 }
 
+.export{
+  position: relative;
+  width: 500px;
+  height: 25px;
+  border-radius: 8px;
+  padding: 2px;
+  margin: 3px;
+
+  border-width: thin;
+  border-color: dimgray;
+  border-style: solid;
+}
+
+.export:hover{
+  opacity: 0.85;
+  width: 515px;
+  height: 35px;
+}

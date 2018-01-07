@@ -8,16 +8,9 @@ import {Duree} from '../Classes/duree';
 export class DataService{
 
 
-  private allCategories:Category[]=[
-    /*{libelle:"Travail",color:COLORS[0]}
-    ,{libelle:"Détente",color:COLORS[1]}
-    ,{libelle:"Loisirs",color:COLORS[2]}*/
-  ];
+  private allCategories:Category[]=[];
 
-  private  allActivities:Activity[]=[
-    /*new Activity("Projet","Le projet d'angular",this.allCategories[0])
-    ,new Activity("Repos","Se reposer après avoir bien travaillé",this.allCategories[1])*/
-  ];
+  private  allActivities:Activity[]=[];
 
 
   getCategories():Category[]{
