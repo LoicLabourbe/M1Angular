@@ -4,7 +4,8 @@ import {Duree} from '../Classes/duree';
 import {DureeComponent} from '../duree/duree.component';
 import {Activity} from '../Classes/activity';
 import {start} from "repl";
-import { Angular2Txt } from 'angular2-txt/Angular2-txt';
+import {Angular2Txt} from 'angular2-txt';
+import {SecondPassedPipe} from '../pipe/secondPassed.pipe';
 
 
 @Component({
@@ -74,11 +75,18 @@ export class ActivityComponent implements OnInit {
       this.start();
   }
 
+  private transform(sec:number): any {
+    let hour=Math.trunc(sec/3600);
+    let min=Math.trunc(sec/60);
+    let seconds=sec%60;
+    return hour+":"+(min>9?min:"0"+min)+":"+(seconds>9?seconds:"0"+seconds);
+  }
+
   public export():void{
     let durees:string = "";
     durees += "Durées de l'activité : \r\n";
     for(var i=0;i<this.mesDurees.length;i++){
-      durees += "durée de la portion : "+this.mesDurees[i].secondsPassed+" \r\n";
+      durees += "durée de la portion : "+this.transform(this.mesDurees[i].secondsPassed)+" \r\n";
       durees += "Début : "+this.mesDurees[i].start.toDateString();
       durees += " \r\n";
       durees += "Fin : "+this.mesDurees[i].end.toDateString();
