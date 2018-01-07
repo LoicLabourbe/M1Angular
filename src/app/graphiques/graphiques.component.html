@@ -5,7 +5,7 @@
       <div>
         <label>
           <span>
-            <select class="select-style" (click)="getDurees(catego);selecCat(catego.libelle)" [(ngModel)]="catego">
+            <select class="select-style" (click)="getDurees(catego);selecCat(catego.libelle,tempsDeb,tempsFin)" [(ngModel)]="catego">
               <option *ngFor="let catego of allCategories" [ngValue]="catego">{{catego.libelle}}</option>
             </select>
           </span>
@@ -14,10 +14,17 @@
       <fieldset class="rechercheA">
         <legend>Recherche avancée</legend>
         <div>
-          <label *ngIf="tempsStart"> Début
+          <label *ngIf="tempsStartF"> Début
             <span>
-              <select class="select-style" *ngIf="percentage" [(ngModel)]="temps">
-                <option *ngFor="let tps of tempsStart" [ngValue]="tps">{{tps | date:'dd/MM :: HH:mm:ss' }}</option>
+              <select class="select-style" (click)="tempsDebSelected(tempsDeb)" *ngIf="tempsStartF" [(ngModel)]="tempsDeb">
+                <option *ngFor="let tempsDeb of tempsStartF" [ngValue]="tempsDeb">{{tempsDeb | date:'(dd/MM) HH' }}</option>
+              </select>
+            </span>
+          </label>
+          <label *ngIf="tempsDeb"> Fin
+            <span>
+              <select class="select-style" *ngIf="tempsEndF" [(ngModel)]="tempsFin">
+                <option *ngFor="let tempsFin of tempsEndF" [ngValue]="tempsFin">{{tempsFin | date:'(dd/MM) HH' }}</option>
               </select>
             </span>
           </label>
@@ -25,7 +32,7 @@
       </fieldset>
      </fieldset>
   </div>
-    <div id="chart" *ngIf="waiter">
+    <div id="chart" *ngIf="waiter+tempsDeb&&tempsFin">
       <fieldset class="fielglob">
         <canvas baseChart
                 [data]="percentage"
