@@ -61,6 +61,8 @@ export class GraphiquesComponent implements OnInit {
       if (this.tempsStart != [] || this.tempsEnd !=[]) {
         this.tempsStart = [];
         this.tempsEnd = [];
+        this.tempsDeb=null;
+        this.tempsFin=null;
       }
       this.allActivity2 = this.dataService.getActivitiesByCategory(name.id);
 
@@ -69,7 +71,6 @@ export class GraphiquesComponent implements OnInit {
       for (let t = 0; t < this.allActivity2.length; t++) {
         for (let u = 0; u < this.allActivity2[t].mesDurees.length; u++) {
           this.tempsStart[cpt] = this.allActivity2[t].mesDurees[u].start;
-          this.tempsEnd[cpt] = this.allActivity2[t].mesDurees[u].end;
           cpt++;
         }
       }
@@ -89,20 +90,7 @@ export class GraphiquesComponent implements OnInit {
         }
         return 1;
       });
-      this.tempsEnd.sort((date1, date2) => {
-        if (date1.getMonth() < date2.getMonth()) {
-          return -1;
-        } else if (date1.getMonth() === date2.getMonth()) {
-          if (date1.getDay() < date2.getDay()) {
-            return -1;
-          } else if(date1.getDay()===date2.getDay()){
-            if(date1.getHours()<date2.getHours()){
-              return -1;
-            }
-          }
-        }
-        return 1;
-      });
+
 
       //--- Selection de seulement des jours/mois  heures ---//
       let cpt2=0;
@@ -114,7 +102,7 @@ export class GraphiquesComponent implements OnInit {
           cpt2++;
         }
       }
-    }, 300);
+    }, 7);
   }
 
 
@@ -145,24 +133,60 @@ export class GraphiquesComponent implements OnInit {
     for(let m=0;m<this.listeDurees.length;m++){
       this.percentage[m]=Math.round((this.listeDurees[m]/this.dureeTOTAL)*100*100)/100;
     }
-    }, 100);
+    }, 5);
   }
 
   tempsDebSelected(date:Date):void{
-    let cpt=0;
-    for(let i=0;i<this.tempsEnd.length;i++){
-      if(date.getDay()<=this.tempsEnd[i].getDay()){
-        this.tempsEndF[cpt]=this.tempsEnd[i];
-        cpt++;
-      }
+    if(this.tempsEndF != []) {
+      this.tempsEndF = [];
+      this.tempsFin=null;
     }
-    let cpt2=1;
-    this.tempsEndF[0]=this.tempsEnd[0];
-    for(let h=1;h<this.tempsEnd.length;h++){
-      if(this.tempsEndF[cpt2-1].getHours()!=this.tempsEnd[h].getHours()) {
-        this.tempsEndF[cpt2] = this.tempsEnd[h];
-        cpt2++;
+    //setTimeout(()=>{
+      let cpt=0;
+      for (let t = 0; t < this.allActivity2.length; t++) {
+        for (let u = 0; u < this.allActivity2[t].mesDurees.length; u++) {
+          this.tempsEnd[cpt] = this.allActivity2[t].mesDurees[u].end;
+          cpt++;
+        }
       }
-    }
+
+      this.tempsEnd.sort((date1, date2) => {
+        if (date1.getMonth() < date2.getMonth()) {
+          return -1;
+        } else if (date1.getMonth() === date2.getMonth()) {
+          if (date1.getDay() < date2.getDay()) {
+            return -1;
+          } else if(date1.getDay()===date2.getDay()){
+            if(date1.getHours()<date2.getHours()){
+              return -1;
+            }
+          }
+        }
+        return 1;
+      });
+
+      let cpt2=1;
+      this.tempsEndF[0]=this.tempsEnd[0];
+      for(let h=1;h<this.tempsEnd.length;h++){
+        if(this.tempsEndF[cpt2-1].getHours()!=this.tempsEnd[h].getHours()) {
+          this.tempsEndF[cpt2] = this.tempsEnd[h];
+          cpt2++;
+        }
+      }
+      /*cpt=0;
+      for(let i=0;i<this.tempsEnd.length;i++){
+        if(date.getDay()==this.tempsEndF[i].getDay()){
+          for(let j=i;j<this.tempsEndF.length;j++) {
+            this.tempsEndF[cpt] = this.tempsEndF[j];
+            cpt++;
+          }
+        }
+        break;
+      }*/
+    //},3)
+  }
+
+  tempsFinSelected():void{
+    setTimeout(()=>{},3);
   }
 }

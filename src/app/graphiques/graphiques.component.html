@@ -23,7 +23,7 @@
           </label>
           <label *ngIf="tempsDeb"> Fin
             <span>
-              <select class="select-style" *ngIf="tempsEndF" [(ngModel)]="tempsFin">
+              <select class="select-style" (click)="tempsFinSelected()" *ngIf="tempsEndF" [(ngModel)]="tempsFin">
                 <option *ngFor="let tempsFin of tempsEndF" [ngValue]="tempsFin">{{tempsFin | date:'(dd/MM) HH' }}</option>
               </select>
             </span>
