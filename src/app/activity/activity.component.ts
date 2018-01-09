@@ -26,6 +26,7 @@ export class ActivityComponent implements OnInit {
   mesDurees:Duree[];
   nbdurees:number;
   lance:boolean;
+  descriptionaffiche:boolean;
 
   @ViewChild(DureeComponent) child:DureeComponent;
 
@@ -39,6 +40,7 @@ export class ActivityComponent implements OnInit {
     this.duree=this.myActivity.duree;
     this.mesDurees=this.myActivity.mesDurees;
     this.lance=false;
+    this.descriptionaffiche=false;
     if (localStorage.getItem('nbdurees'+this.nom) === null)
     {
       this.nbdurees = 0;
@@ -73,6 +75,12 @@ export class ActivityComponent implements OnInit {
       this.stop();
     else
       this.start();
+  }
+  public clickDescription(){
+    if(this.descriptionaffiche)
+      this.descriptionaffiche=false;
+    else
+      this.descriptionaffiche=true;
   }
 
   private transform(sec:number): any {
