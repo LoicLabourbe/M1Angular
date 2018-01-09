@@ -5,7 +5,7 @@
       <div>
         <label>
           <span>
-            <select class="select-style" (click)="getDurees(catego);selecCat(catego.libelle,tempsDeb,tempsFin)" [(ngModel)]="catego">
+            <select class="select-style" (click)="waitCatego()" [(ngModel)]="catego">
               <option *ngFor="let catego of allCategories" [ngValue]="catego">{{catego.libelle}}</option>
             </select>
           </span>
@@ -16,15 +16,15 @@
         <div>
           <label *ngIf="tempsStartF"> Début
             <span>
-              <select class="select-style" (click)="tempsDebSelected(tempsDeb)" *ngIf="tempsStartF" [(ngModel)]="tempsDeb">
-                <option *ngFor="let tempsDeb of tempsStartF" [ngValue]="tempsDeb">{{tempsDeb | date:'(dd/MM) HH' }}</option>
+              <select class="select-style" (click)="waitTempsDeb()" *ngIf="tempsStartF" [(ngModel)]="tempsDeb">
+                <option *ngFor="let tempsDeb of tempsStartF" [ngValue]="tempsDeb">{{tempsDeb | date:'dd/MM/yyyy' }}</option>
               </select>
             </span>
           </label>
           <label *ngIf="tempsDeb"> Fin
             <span>
-              <select class="select-style" (click)="tempsFinSelected()" *ngIf="tempsEndF" [(ngModel)]="tempsFin">
-                <option *ngFor="let tempsFin of tempsEndF" [ngValue]="tempsFin">{{tempsFin | date:'(dd/MM) HH' }}</option>
+              <select class="select-style" (click)="waitBoth()" *ngIf="tempsDeb" [(ngModel)]="tempsFin">
+                <option *ngFor="let tempsFin of tempsEndFSup" [ngValue]="tempsFin">{{tempsFin | date:'dd/MM/yyyy' }}</option>
               </select>
             </span>
           </label>
@@ -32,12 +32,11 @@
       </fieldset>
      </fieldset>
   </div>
-    <div id="chart" *ngIf="waiter+tempsDeb&&tempsFin">
+    <div id="chart" *ngIf="percentage&&tempsDeb&&tempsFin" >
       <fieldset class="fielglob">
         <canvas baseChart
                 [data]="percentage"
                 [labels]="listeActivitees"
-                [options]="pieChartOptions"
                 [chartType]="pieChartType">
         </canvas>
       </fieldset>

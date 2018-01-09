@@ -3,6 +3,7 @@ import {Activity} from '../Classes/activity';
 import {Category} from '../Classes/category';
 import {DataService} from '../services/data.service';
 import {Duree} from '../Classes/duree';
+import {Color} from '../Classes/color';
 
 @Component({
   selector: 'app-graphiques',
@@ -17,22 +18,19 @@ export class GraphiquesComponent implements OnInit {
   tempsEnd:Date[]=[];
   tempsStartF:Date[]=[];
   tempsEndF:Date[]=[];
+  tempsEndFSup:Date[]=[];
   tempsDeb:Date;
   tempsFin:Date;
   duree:Duree;
   activity:Activity;
-  allActivity:Activity[];
   allActivity2:Activity[];
   listeActivitees:string[]=[];
   allCategories:Category[];
   catego:Category;
   dureeTotal:number=0;
   dureeTOTAL:number=0;
-  waiter:Boolean;
   pieChartType:string = 'pie';
-  pieChartOptions:any = {
-    animation: false
-  };
+  listeCouleur:Color[];
 
   constructor(private dataService:DataService) { }
 
@@ -44,40 +42,29 @@ export class GraphiquesComponent implements OnInit {
     this.listeDurees=[];
     this.dureeTOTAL=0;
     this.percentage=[];
-    this.listeActivitees=[];
-    this.catego=null;
-    this.allActivity=[];
-    this.waiter=false;
-    this.tempsStart=[];
-    this.tempsEnd=[];
-    this.tempsStartF=[];
-    this.tempsEndF=[];
-    this.tempsDeb=null;
-    this.tempsFin=null;
   }
 
-  getDurees(name:Category):void {
-    setTimeout(() => {
-      if (this.tempsStart != [] || this.tempsEnd !=[]) {
-        this.tempsStart = [];
-        this.tempsEnd = [];
-        this.tempsDeb=null;
-        this.tempsFin=null;
-      }
-      this.allActivity2 = this.dataService.getActivitiesByCategory(name.id);
 
+  getDurees(name:Category):void {
+
+    setTimeout(() => {
+      this.allActivity2 = this.dataService.getActivitiesByCategory(name.id);
       //--- Recupération de toutes les Dates de toutes les activitées d'un catégories ---//
       let cpt = 0;
       for (let t = 0; t < this.allActivity2.length; t++) {
+        this.listeActivitees[t] = this.allActivity2[t].nom;
         for (let u = 0; u < this.allActivity2[t].mesDurees.length; u++) {
           this.tempsStart[cpt] = this.allActivity2[t].mesDurees[u].start;
+          this.tempsEnd[cpt] = this.allActivity2[t].mesDurees[u].end;
           cpt++;
         }
       }
 
       //--- Trie des tableaux de Dates ---//
       this.tempsStart.sort((date1, date2) => {
-        if (date1.getMonth() < date2.getMonth()) {
+        if (date1.getFullYear() < date2.getFullYear()) {
+          return -1;
+        } else if (date1.getMonth() < date2.getMonth()) {
           return -1;
         } else if (date1.getMonth() === date2.getMonth()) {
           if (date1.getDay() < date2.getDay()) {
@@ -91,67 +78,55 @@ export class GraphiquesComponent implements OnInit {
         return 1;
       });
 
-
-      //--- Selection de seulement des jours/mois  heures ---//
+      //--- Selection de seulement des jours unique ---//
       let cpt2=0;
       this.tempsStartF[cpt2]=this.tempsStart[cpt2];
       cpt2++;
       for(let h=1;h<this.tempsStart.length;h++){
-        if(this.tempsStartF[cpt2-1].getHours()!=this.tempsStart[h].getHours()) {
+        if(this.tempsStartF[cpt2-1].getDay()!=this.tempsStart[h].getDay()) {
           this.tempsStartF[cpt2] = this.tempsStart[h];
           cpt2++;
+        }
+        if(this.tempsStartF[cpt2-1].getDay()==this.tempsStart[h].getDay()){
+          if(this.tempsStartF[cpt2-1].getMonth()!=this.tempsStart[h].getMonth()){
+            this.tempsStartF[cpt2] = this.tempsStart[h];
+            cpt2++;
+          }
         }
       }
     }, 7);
   }
 
-
-  selecCat(name:string,dateStart:Date,dateEnd:Date):void{
-    this.waiter=false;
-    setTimeout(()=>{this.reset();
-    for (let i = 0; i < this.allCategories.length; i++) {
-      if (this.allCategories[i].libelle === name) {
-        this.catego = this.allCategories[i];
-        this.allActivity = this.dataService.getActivitiesByCategory(this.catego.id);
-
-        for (let j = 0; j < this.allActivity.length; j++) {
-          this.dureeTotal = 0;
-          this.listeActivitees[j] = this.allActivity[j].nom;
-          for (let k = 0; k < this.allActivity[j].mesDurees.length; k++) {
-           // if(dateStart.getDay() <= this.allActivity[j].mesDurees[k].start.getDay() && dateEnd.getDay() >= this.allActivity[j].mesDurees[k].end.getDay()) {
-              this.dureeTotal += this.allActivity[j].mesDurees[k].secondsPassed;
-            //}
+  selecCat():void {
+    setTimeout(()=>{
+      this.reset();
+      for (let j = 0; j < this.allActivity2.length; j++) {
+        this.dureeTotal = 0;
+        for (let k = 0; k < this.allActivity2[j].mesDurees.length; k++) {
+          if (this.tempsDeb.getDay() <= this.allActivity2[j].mesDurees[k].start.getDay() && this.tempsFin.getDay() >= this.allActivity2[j].mesDurees[k].end.getDay()) {
+            this.dureeTotal += this.allActivity2[j].mesDurees[k].secondsPassed;
           }
-          this.listeDurees[j] = this.dureeTotal;
-          this.dureeTOTAL += this.dureeTotal;
         }
-        break;
+        this.listeDurees[j] = this.dureeTotal;
+        this.dureeTOTAL += this.dureeTotal;
       }
-    }
-    this.waiter=true;
-    //--- Affichage des pourcentages---//
-    for(let m=0;m<this.listeDurees.length;m++){
-      this.percentage[m]=Math.round((this.listeDurees[m]/this.dureeTOTAL)*100*100)/100;
-    }
-    }, 5);
+      //--- Affichage des pourcentages---//
+      for (let m = 0; m < this.listeDurees.length; m++) {
+        this.percentage[m] = Math.round((this.listeDurees[m] / this.dureeTOTAL) * 100 * 100) / 100;
+      }
+    },5);
   }
 
-  tempsDebSelected(date:Date):void{
-    if(this.tempsEndF != []) {
-      this.tempsEndF = [];
-      this.tempsFin=null;
-    }
+  tempsDebSelected():void{
     //setTimeout(()=>{
-      let cpt=0;
-      for (let t = 0; t < this.allActivity2.length; t++) {
-        for (let u = 0; u < this.allActivity2[t].mesDurees.length; u++) {
-          this.tempsEnd[cpt] = this.allActivity2[t].mesDurees[u].end;
-          cpt++;
-        }
+      if(this.tempsEndFSup != []) {
+        this.tempsEndFSup=[];
+        this.tempsFin=null;
       }
-
       this.tempsEnd.sort((date1, date2) => {
-        if (date1.getMonth() < date2.getMonth()) {
+        if (date1.getFullYear() < date2.getFullYear()) {
+          return -1;
+        } else if (date1.getMonth() < date2.getMonth()) {
           return -1;
         } else if (date1.getMonth() === date2.getMonth()) {
           if (date1.getDay() < date2.getDay()) {
@@ -164,29 +139,51 @@ export class GraphiquesComponent implements OnInit {
         }
         return 1;
       });
-
       let cpt2=1;
       this.tempsEndF[0]=this.tempsEnd[0];
       for(let h=1;h<this.tempsEnd.length;h++){
-        if(this.tempsEndF[cpt2-1].getHours()!=this.tempsEnd[h].getHours()) {
+        if(this.tempsEndF[cpt2-1].getDay()!=this.tempsEnd[h].getDay()) {
           this.tempsEndF[cpt2] = this.tempsEnd[h];
           cpt2++;
         }
-      }
-      /*cpt=0;
-      for(let i=0;i<this.tempsEnd.length;i++){
-        if(date.getDay()==this.tempsEndF[i].getDay()){
-          for(let j=i;j<this.tempsEndF.length;j++) {
-            this.tempsEndF[cpt] = this.tempsEndF[j];
-            cpt++;
+        if(this.tempsEndF[cpt2-1].getDay()==this.tempsEnd[h].getDay()) {
+          if (this.tempsEndF[cpt2 - 1].getMonth() != this.tempsEnd[h].getMonth()) {
+            this.tempsEndF[cpt2] = this.tempsEnd[h];
+            cpt2++;
           }
         }
-        break;
-      }*/
-    //},3)
+      }
+      let cpt=0;
+      for(let i=0;i<this.tempsEndF.length;i++){
+        if(this.tempsDeb.getDay()<=this.tempsEndF[i].getDay()){
+            this.tempsEndFSup[cpt] = this.tempsEndF[i];
+            cpt++;
+        }
+      }
+
+    //},10)
   }
 
-  tempsFinSelected():void{
-    setTimeout(()=>{},3);
+  waitTempsDeb():void{
+    if(this.tempsDeb != null){
+      this.tempsDebSelected();
+    }
+  }
+  waitBoth():void{
+    if(this.tempsDeb != null && this.tempsFin !=null && this.catego!=null){
+      this.selecCat();
+    }
+  }
+  waitCatego():void {
+    this.tempsStart = [];
+    this.tempsEnd = [];
+    this.tempsDeb=null;
+    this.tempsFin=null;
+    this.tempsStartF=[];
+    this.tempsEndF = [];
+    this.tempsEndFSup=[];
+    if (this.catego != null) {
+      this.getDurees(this.catego);
+    }
   }
 }
