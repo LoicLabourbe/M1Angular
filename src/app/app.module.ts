@@ -8,7 +8,6 @@ import {DureeComponent} from './duree/duree.component';
 import {ActivityComponent} from './activity/activity.component';
 import {FormulaireCategoryComponent} from './formulaire-category/formulaire-category.component';
 import {FormulaireActiviteComponent} from './formulaire-activite/formulaire-activite.component';
-import {HomeComponent} from './home/home.component';
 import {DataService} from './services/data.service';
 import {AppRoutingModule} from './app-routing.module';
 import {CategoryComponent} from './category/category.component';
@@ -26,7 +25,6 @@ import {ChartsModule} from 'ng2-charts';
     ActivityComponent,
     FormulaireCategoryComponent,
     FormulaireActiviteComponent,
-    HomeComponent,
     CategoryComponent,
     HomeActivityComponent,
     HomeCategoryComponent,
