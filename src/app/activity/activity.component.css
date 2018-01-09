@@ -1,20 +1,42 @@
 .activity{
   position: relative;
   width: 500px;
-  height: 100px;
+  height: 70px;
   border-radius: 8px;
   padding: 2px;
   margin: 3px;
-
+  margin-bottom: 0px;
   border-width: thin;
   border-color: dimgray;
   border-style: solid;
 }
 
-.activity:hover{
+
+.description{
+  display: none;
+  width: 515px;
+  height: auto;
+  border-radius: 8px;
+  padding: 2px;
+  margin: 3px;
+  margin-top: 0px;
+  border-width: thin;
+  border-color: dimgray;
+  border-style: solid;
+  background: gainsboro;
+}
+
+.description:hover{
+  display: block;
+}
+
+
+.activity:hover {
   opacity: 0.85;
   width: 515px;
-  height: 110px;
+}
+.activity:hover +.description{
+  display: block;
 }
 
 .activity-div{
@@ -36,7 +58,7 @@
 }
 
 .duree {
-  height: 95px;
+  height: 65px;
   width: 150px;
   position: absolute;
   top: 5px;
@@ -53,6 +75,7 @@
   border-width: thin;
   border-color: dimgray;
   border-style: solid;
+  margin-bottom: 10px;
 }
 
 .export:hover{

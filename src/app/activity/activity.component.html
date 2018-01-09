@@ -5,11 +5,7 @@
       {{nom}}
     </h3>
   </div>
-  <div class="description">
-    <p>
-      {{description}}
-    </p>
-  </div>
+
 
   <!--
   <div *ngIf="mesDurees">
@@ -26,5 +22,9 @@
   -->
   <app-duree [duree]="duree" class="duree"></app-duree>
 </div>
+<span class="description" [ngStyle]="{'background':category.color.htmlCode}" >
+  <p>{{description}}</p>
+</span>
+
 <button class="export" (click)="export()">Exporter</button>
 
