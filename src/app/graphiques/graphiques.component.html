@@ -1,45 +1,43 @@
 
-  <div>
-    <fieldset class="fielglob">
-      <legend>Historique</legend>
-      <div>
-        <label>
+<div>
+  <fieldset class="fielglob">
+    <legend>Historique</legend>
+    <div>
+      <label>
           <span>
             <select class="select-style" (change)="waitCatego()" [(ngModel)]="catego">
               <option *ngFor="let catego of allCategories" [ngValue]="catego">{{catego.libelle}}</option>
             </select>
           </span>
-        </label>
-      </div>
-      <fieldset class="rechercheA">
-        <legend>Recherche avancée</legend>
-        <div>
-          <label *ngIf="tempsStartF"> Début
-            <span>
+      </label>
+    </div>
+    <fieldset class="rechercheA">
+      <legend>Recherche avancée</legend>
+      <div>
+        <label *ngIf="tempsStartF"> Début
+          <span>
               <select class="select-style" (change)="waitTempsDeb()" *ngIf="tempsStartF" [(ngModel)]="tempsDeb">
                 <option *ngFor="let tempsDeb of tempsStartF" [ngValue]="tempsDeb">{{tempsDeb | date:'dd/MM/yyyy' }}</option>
               </select>
             </span>
-          </label>
-          <label *ngIf="tempsDeb"> Fin
-            <span>
+        </label>
+        <label *ngIf="tempsDeb"> Fin
+          <span>
               <select class="select-style" (change)="waitBoth()"  *ngIf="tempsDeb&&tempsEndF" [(ngModel)]="tempsFin">
                 <option *ngFor="let tempsFin of tempsEndFSup" [ngValue]="tempsFin">{{tempsFin | date:'dd/MM/yyyy' }}</option>
               </select>
             </span>
-          </label>
-        </div>
-      </fieldset>
-     </fieldset>
-  </div>
-    <div id="chart" *ngIf="tempsDeb&&tempsFin&&dureeTotal&&dureeTOTAL&&listeActivitees&&listeDurees" >
-      <fieldset class="fielglob">
-        <canvas baseChart
-                [data]="percentage"
-                [labels]="listeActivitees"
-                [chartType]="pieChartType">
-        </canvas>
-      </fieldset>
-    </div>
-
-
+        </label>
+      </div>
+    </fieldset>
+  </fieldset>
+</div>
+<div id="chart" *ngIf="tempsDeb&&tempsFin&&dureeTOTAL&&listeActivitees&&listeDurees" >
+  <fieldset class="fielglob">
+    <canvas baseChart
+            [data]="percentage"
+            [labels]="listeActivitees"
+            [chartType]="pieChartType">
+    </canvas>
+  </fieldset>
+</div>

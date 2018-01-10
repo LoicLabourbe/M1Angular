@@ -1,6 +1,6 @@
-#chart {
+.chart {
   display: block;
-  width: 100%;
+  width: 50%;
 }
 
 button {

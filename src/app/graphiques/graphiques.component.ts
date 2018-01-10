@@ -3,7 +3,6 @@ import {Activity} from '../Classes/activity';
 import {Category} from '../Classes/category';
 import {DataService} from '../services/data.service';
 import {Duree} from '../Classes/duree';
-import {Color} from '../Classes/color';
 
 @Component({
   selector: 'app-graphiques',
@@ -24,8 +23,8 @@ export class GraphiquesComponent implements OnInit {
   duree:Duree;
   activity:Activity;
   allActivity2:Activity[];
+  allActivity3:Activity[]=[];
   listeActivitees:string[]=[];
-  listeActivitees2:string[]=[];
   allCategories:Category[];
   catego:Category;
   dureeTotal:number=0;
@@ -59,6 +58,7 @@ export class GraphiquesComponent implements OnInit {
     this.dureeTotal=0;
     this.dureeTOTAL=0;
     this.percentage=[];
+    this.allActivity3=[];
   }
 
   creatingList(name:Category):void {
@@ -99,7 +99,7 @@ export class GraphiquesComponent implements OnInit {
     this.listeDurees=[];
     this.dureeTotal=0;
     this.dureeTOTAL=0;
-
+    this.allActivity3=[];
     let cpt = 0;
     for (let t = 0; t < this.allActivity2.length; t++) {
       for (let u = 0; u < this.allActivity2[t].mesDurees.length; u++) {
@@ -125,15 +125,19 @@ export class GraphiquesComponent implements OnInit {
     this.dureeTotal=0;
     this.dureeTOTAL=0;
     this.percentage=[];
+    this.allActivity3=[];
     setTimeout(()=> {
       for (let j = 0; j < this.allActivity2.length; j++) {
         this.dureeTotal = 0;
-        this.listeActivitees[j] = this.allActivity2[j].nom;
+
         for (let k = 0; k < this.allActivity2[j].mesDurees.length; k++) {
           if (this.tempsDeb.getDay() <= this.allActivity2[j].mesDurees[k].start.getDay() && this.tempsFin.getDay() >= this.allActivity2[j].mesDurees[k].end.getDay()) {
             this.dureeTotal += this.allActivity2[j].mesDurees[k].secondsPassed;
+
           }
         }
+        if(this.dureeTotal!=0)
+          this.listeActivitees[j] = this.allActivity2[j].nom;
         this.listeDurees[j] = this.dureeTotal;
         this.dureeTOTAL += this.dureeTotal;
       }
