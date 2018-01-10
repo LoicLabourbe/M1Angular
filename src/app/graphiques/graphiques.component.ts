@@ -23,28 +23,32 @@ export class GraphiquesComponent implements OnInit {
   duree:Duree;
   activity:Activity;
   allActivity2:Activity[];
-  allActivity3:Activity[]=[];
   listeActivitees:string[]=[];
   allCategories:Category[];
   catego:Category;
   dureeTotal:number=0;
   dureeTOTAL:number=0;
   pieChartType:string = 'pie';
-  waiter:Boolean=false;
-  /*pieChartOptions:any = {
-    animation: false
-  };*/
+
+
+  dureeTotalCat:number;
+  percentageCat:number[]=[];
+  dureeTOTALCat:number;
+  nameCategorie:string[]=[];
+  listeDureesCat:number[]=[];
+  allActivityByCat:Activity[][]=[];
+  listeColor:string[]=[];
+  pieChartColors:any[]=[];
 
 
   constructor(private dataService:DataService) { }
 
   ngOnInit() {
     this.allCategories=this.dataService.getCategories();
-    this.waiter=false;
+    this.creatingGraphCat();
   }
 
   reset():void{
-
     //--- TOUTES les valeurs reinitialisées ---//
     this.tempsDeb=null;
     this.tempsFin=null;
@@ -60,7 +64,6 @@ export class GraphiquesComponent implements OnInit {
     this.dureeTotal=0;
     this.dureeTOTAL=0;
     this.percentage=[];
-    this.allActivity3=[];
   }
 
   creatingList(name:Category):void {
@@ -157,6 +160,50 @@ export class GraphiquesComponent implements OnInit {
       for (let m = 0; m < this.listeDurees.length; m++) {
         this.percentage[m] = Math.round((this.listeDurees[m] / this.dureeTOTAL) * 100 * 100) / 100;
       }
+    },50);
+  }
+
+  waiter:Boolean=false;
+  WAITcreatingGraphCat():void{
+    if(this.waiter===false){
+      this.waiter=true;
+    }else{
+      this.creatingGraphCat();
+      this.waiter=false;
+    }
+  }
+
+  creatingGraphCat():void{
+    this.dureeTOTALCat=0;
+    this.percentageCat=[];
+    this.nameCategorie=[];
+    this.allActivityByCat=[];
+    this.listeDureesCat=[];
+    this.allCategories=[];
+    this.listeColor=[];
+    setTimeout(()=>{
+      this.allCategories=this.dataService.getCategories();
+      for(let a=0;a<this.allCategories.length;a++) {
+        this.listeColor[a]=this.allCategories[a].color.htmlCode.toLowerCase();
+        console.log(this.listeColor[a]);
+        this.dureeTotalCat = 0;
+        this.allActivityByCat[a] = this.dataService.getActivitiesByCategory(a + 1);
+        for (let c = 0; c < this.allActivityByCat[a].length;c++){
+          for (let b = 0; b < this.allActivityByCat[a][c].mesDurees.length; b++) {
+            this.dureeTotalCat += this.allActivityByCat[a][c].mesDurees[b].secondsPassed;
+          }
+        }
+        if(this.dureeTotalCat!=0)
+          this.nameCategorie[a]=this.allCategories[a].libelle;
+        this.listeDureesCat[a] = this.dureeTotalCat;
+        this.dureeTOTALCat += this.dureeTotalCat;
+      }
+      for (let m = 0; m < this.listeDureesCat.length; m++) {
+        this.percentageCat[m] = Math.round((this.listeDureesCat[m] / this.dureeTOTALCat) * 100 * 100) / 100;
+      }
+      this.pieChartColors = [{
+        backgroundColor: this.listeColor
+      }];
     },50);
   }
 

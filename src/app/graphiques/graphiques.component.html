@@ -29,14 +29,26 @@
             </span>
         </label>
       </div>
+      <button (click)="WAITcreatingGraphCat()">Graphe des catégories</button>
     </fieldset>
   </fieldset>
 </div>
-<div id="chart" *ngIf="tempsDeb&&tempsFin&&dureeTOTAL&&listeActivitees&&listeDurees" >
+<div class="chart" *ngIf="tempsDeb&&tempsFin&&dureeTOTAL&&listeActivitees&&listeDurees" >
   <fieldset class="fielglob">
     <canvas baseChart
             [data]="percentage"
             [labels]="listeActivitees"
+            [chartType]="pieChartType">
+    </canvas>
+  </fieldset>
+</div>
+<div class="chart" *ngIf="waiter&&pieChartColors" >
+  <fieldset class="fielglob">
+    <legend>Camembert de vos catégories</legend>
+    <canvas baseChart
+            [data]="percentageCat"
+            [labels]="nameCategorie"
+            [colors]="pieChartColors"
             [chartType]="pieChartType">
     </canvas>
   </fieldset>
