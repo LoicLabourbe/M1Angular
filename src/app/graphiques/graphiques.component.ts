@@ -44,6 +44,8 @@ export class GraphiquesComponent implements OnInit {
   }
 
   reset():void{
+
+    //--- TOUTES les valeurs reinitialisées ---//
     this.tempsDeb=null;
     this.tempsFin=null;
     this.tempsFin=null;
@@ -64,6 +66,8 @@ export class GraphiquesComponent implements OnInit {
   creatingList(name:Category):void {
     this.reset();
     setTimeout(()=> {
+
+      //--- Creation des temps de démarrage des activitées ---//
       this.allActivity2 = this.dataService.getActivitiesByCategory(name.id);
       let cpt = 0;
       for (let t = 0; t < this.allActivity2.length; t++) {
@@ -73,18 +77,20 @@ export class GraphiquesComponent implements OnInit {
           cpt++;
         }
       }
+
+      //--- Calcule des Durées pour le data des charts ---//
       for (let j = 0; j < this.allActivity2.length; j++) {
         this.dureeTotal = 0;
         this.listeActivitees[j] = this.allActivity2[j].nom;
         for (let k = 0; k < this.allActivity2[j].mesDurees.length; k++) {
-          this.dureeTotal += this.allActivity2[j].mesDurees[k].secondsPassed;
+          this.dureeTotal += this.allActivity2[j].mesDurees[k].secondsPassed; //regroupement de tout les temps fait par une activitée
         }
-        this.listeDurees[j] = this.dureeTotal;
-        this.dureeTOTAL += this.dureeTotal;
+        this.listeDurees[j] = this.dureeTotal; // recueille tout le temps total pour chaque activitée
+        this.dureeTOTAL += this.dureeTotal; // temps total fait dans une activitée
       }
 
       for (let m = 0; m < this.listeDurees.length; m++) {
-        this.percentage[m] = Math.round((this.listeDurees[m] / this.dureeTOTAL) * 100 * 100) / 100;
+        this.percentage[m] = Math.round((this.listeDurees[m] / this.dureeTOTAL) * 100 * 100) / 100; //affichage du graphe en pourcentage
       }
       GraphiquesComponent.trieTableau(this.tempsStart);
       GraphiquesComponent.trieTableauDoublonJ(this.tempsStart, this.tempsStartF);
@@ -92,14 +98,16 @@ export class GraphiquesComponent implements OnInit {
   }
 
   tempsDebSelected():void {
+
+    //--- valeurs spécifiques à réinitialisés pour la mise a jour du graphe et des listes ---//
     this.tempsFin=null;
     this.tempsEndFSup=[];
-
     this.listeActivitees=[];
     this.listeDurees=[];
     this.dureeTotal=0;
     this.dureeTOTAL=0;
-    this.allActivity3=[];
+
+    //--- création de la liste des temps de départ selon la date de debut selectionné ---//
     let cpt = 0;
     for (let t = 0; t < this.allActivity2.length; t++) {
       for (let u = 0; u < this.allActivity2[t].mesDurees.length; u++) {
@@ -111,6 +119,8 @@ export class GraphiquesComponent implements OnInit {
     GraphiquesComponent.trieTableau(this.tempsEnd);
     GraphiquesComponent.trieTableauDoublonJ(this.tempsEnd, this.tempsEndF);
     cpt = 0;
+
+    //--- Selectionne les dates de fin postérieurs à la date de début ---//
     for (let i = 0; i < this.tempsEndF.length; i++) {
       if (this.tempsDeb.getDay() <= this.tempsEndF[i].getDay()) {
         this.tempsEndFSup[cpt] = this.tempsEndF[i];
@@ -120,16 +130,18 @@ export class GraphiquesComponent implements OnInit {
   }
 
   tempsFinSelected():void {
+
+    //--- valeur spécifique à reinitialisées pour la MAJ du graphe et des listes ---//
     this.listeActivitees=[];
     this.listeDurees=[];
     this.dureeTotal=0;
     this.dureeTOTAL=0;
     this.percentage=[];
-    this.allActivity3=[];
     setTimeout(()=> {
+
+      //--- calcule des durées en fonction de la date de début et de fin selectionnées ---//
       for (let j = 0; j < this.allActivity2.length; j++) {
         this.dureeTotal = 0;
-
         for (let k = 0; k < this.allActivity2[j].mesDurees.length; k++) {
           if (this.tempsDeb.getDay() <= this.allActivity2[j].mesDurees[k].start.getDay() && this.tempsFin.getDay() >= this.allActivity2[j].mesDurees[k].end.getDay()) {
             this.dureeTotal += this.allActivity2[j].mesDurees[k].secondsPassed;
@@ -148,6 +160,7 @@ export class GraphiquesComponent implements OnInit {
     },50);
   }
 
+  //--- fonctions pour temporiser, afin que les valeurs nécessaires pour le graphe soit présentes ---//
   waitTempsDeb():void{
     if(this.tempsDeb != null){
       this.tempsDebSelected();
@@ -166,6 +179,7 @@ export class GraphiquesComponent implements OnInit {
     }
   }
 
+  //--- trie un tableau de date selon l'année, puis le mois et enfin le jour ---//
   static trieTableau(Tab:Date[]):void{
     Tab.sort((date1, date2) => {
       if (date1.getFullYear() < date2.getFullYear()) {
@@ -185,6 +199,7 @@ export class GraphiquesComponent implements OnInit {
     });
   }
 
+  //--- supprime les dates doublons dans un tableau TRIE ! ---//
   static trieTableauDoublonJ(Tab:Date[], Tab1:Date[]):void{
     let cpt2=0;
     Tab1[cpt2]=Tab[cpt2];
@@ -198,6 +213,11 @@ export class GraphiquesComponent implements OnInit {
         if(Tab1[cpt2-1].getMonth()!=Tab[h].getMonth()){
           Tab1[cpt2] = Tab[h];
           cpt2++;
+        } else if(Tab1[cpt2-1].getMonth()==Tab[h].getMonth()) {
+          if(Tab1[cpt2-1].getFullYear()!=Tab[h].getFullYear()){
+            Tab1[cpt2] = Tab[h];
+            cpt2++;
+          }
         }
       }
     }
