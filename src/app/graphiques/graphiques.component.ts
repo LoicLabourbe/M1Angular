@@ -114,7 +114,6 @@ export class GraphiquesComponent implements OnInit {
     let cpt = 0;
     for (let t = 0; t < this.allActivity2.length; t++) {
       for (let u = 0; u < this.allActivity2[t].mesDurees.length; u++) {
-        this.tempsStart[cpt] = this.allActivity2[t].mesDurees[u].start;
         this.tempsEnd[cpt] = this.allActivity2[t].mesDurees[u].end;
         cpt++;
       }
