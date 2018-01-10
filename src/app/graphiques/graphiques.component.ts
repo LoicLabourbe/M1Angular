@@ -80,21 +80,6 @@ export class GraphiquesComponent implements OnInit {
           cpt++;
         }
       }
-
-      //--- Calcule des Durées pour le data des charts ---//
-      for (let j = 0; j < this.allActivity2.length; j++) {
-        this.dureeTotal = 0;
-        this.listeActivitees[j] = this.allActivity2[j].nom;
-        for (let k = 0; k < this.allActivity2[j].mesDurees.length; k++) {
-          this.dureeTotal += this.allActivity2[j].mesDurees[k].secondsPassed; //regroupement de tout les temps fait par une activitée
-        }
-        this.listeDurees[j] = this.dureeTotal; // recueille tout le temps total pour chaque activitée
-        this.dureeTOTAL += this.dureeTotal; // temps total fait dans une activitée
-      }
-
-      for (let m = 0; m < this.listeDurees.length; m++) {
-        this.percentage[m] = Math.round((this.listeDurees[m] / this.dureeTOTAL) * 100 * 100) / 100; //affichage du graphe en pourcentage
-      }
       GraphiquesComponent.trieTableau(this.tempsStart);
       GraphiquesComponent.trieTableauDoublonJ(this.tempsStart, this.tempsStartF);
     },50);
