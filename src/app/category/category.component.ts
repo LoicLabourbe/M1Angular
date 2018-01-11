@@ -27,6 +27,7 @@ export class CategoryComponent implements OnInit {
   }
 
   goToDetail():void{
+    // noinspection JSIgnoredPromiseFromCall
     this.router.navigate(['/homeActivity', this.id]);
   }
 

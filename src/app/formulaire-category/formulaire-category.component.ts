@@ -33,9 +33,9 @@ export class FormulaireCategoryComponent implements OnInit {
   }
 
   reductionCouleur(){
-    for(var j =1; j<=parseInt(localStorage.getItem('nbCategorie'),10);j++){
-      var c = localStorage.getItem('colorCat'+j);
-      for(var i = 0; i<this.possibleColors.length; i++){
+    for(let j =1; j<=parseInt(localStorage.getItem('nbCategorie'),10);j++){
+      let c = localStorage.getItem('colorCat'+j);
+      for(let i = 0; i<this.possibleColors.length; i++){
         if(c === this.possibleColors[i].libelle){
           this.possibleColors.splice(i,1);
           break;
@@ -49,13 +49,13 @@ export class FormulaireCategoryComponent implements OnInit {
       this.nbCategorie++;
       localStorage.setItem('nbCategorie', this.nbCategorie.toString());
       this.dataService.addCat(new Category(libelle, color,this.nbCategorie));
-      for (var i = 0; i <= this.possibleColors.length; i++) {
+      for (let i = 0; i <= this.possibleColors.length; i++) {
         if (color === this.possibleColors[i]) {
           this.possibleColors.splice(i, 1);
           break;
         }
       }
-        var cat = new Category(libelle, color,this.nbCategorie);
+        let cat = new Category(libelle, color,this.nbCategorie);
         this.ajoutLocal(libelle, color);
         this.allCategories.push(cat);
         this.reinitialiser();

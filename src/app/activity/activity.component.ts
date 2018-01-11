@@ -3,9 +3,7 @@ import {Category} from '../Classes/category';
 import {Duree} from '../Classes/duree';
 import {DureeComponent} from '../duree/duree.component';
 import {Activity} from '../Classes/activity';
-import {start} from "repl";
 import {Angular2Txt} from 'angular2-txt';
-import {SecondPassedPipe} from '../pipe/secondPassed.pipe';
 
 
 @Component({
@@ -77,13 +75,10 @@ export class ActivityComponent implements OnInit {
       this.start();
   }
   public clickDescription(){
-    if(this.descriptionaffiche)
-      this.descriptionaffiche=false;
-    else
-      this.descriptionaffiche=true;
+    this.descriptionaffiche=!this.descriptionaffiche;
   }
 
-  private transform(sec:number): any {
+  private static transform(sec:number): any {
     let hour=Math.trunc(sec/3600);
     let min=Math.trunc(sec/60);
     let seconds=sec%60;
@@ -93,8 +88,8 @@ export class ActivityComponent implements OnInit {
   public export():void{
     let durees:string = "";
     durees += "Durées de l'activité : \r\n";
-    for(var i=0;i<this.mesDurees.length;i++){
-      durees += "durée de la portion : "+this.transform(this.mesDurees[i].secondsPassed)+" \r\n";
+    for(let i=0;i<this.mesDurees.length;i++){
+      durees += "durée de la portion : "+ActivityComponent.transform(this.mesDurees[i].secondsPassed)+" \r\n";
       durees += "Début : "+this.mesDurees[i].start.toDateString();
       durees += " \r\n";
       durees += "Fin : "+this.mesDurees[i].end.toDateString();
@@ -111,5 +106,4 @@ export class ActivityComponent implements OnInit {
     ];
     new Angular2Txt(data, this.nom);
   }
-
 }

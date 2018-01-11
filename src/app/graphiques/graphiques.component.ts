@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {Activity} from '../Classes/activity';
 import {Category} from '../Classes/category';
 import {DataService} from '../services/data.service';

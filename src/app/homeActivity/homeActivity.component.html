@@ -1,5 +1,5 @@
 
 <h2>{{title}}{{nomCategorie}}</h2>
-<div  *ngFor="let activity of allActivities">
+<div  *ngFor="let activity of allActivities.reverse()">
   <app-activity [myActivity]="activity"></app-activity>
 </div>

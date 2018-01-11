@@ -2,8 +2,6 @@ import {Component, OnInit} from '@angular/core';
 import {Activity} from '../Classes/activity';
 import {Category} from '../Classes/category';
 import {DataService} from '../services/data.service';
-import {Color} from '../Classes/color';
-import {Duree} from '../Classes/duree';
 
 @Component({
   selector: 'app-formulaire-activite',
@@ -14,8 +12,6 @@ export class FormulaireActiviteComponent implements OnInit {
 
   allActivities:Activity[];
   allCategories:Category[];
-
-  visible:boolean=false;
 
   //champ du formulaire pour la création d'une activité
   libelle:string;

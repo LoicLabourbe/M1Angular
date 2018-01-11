@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {Activity} from '../Classes/activity';
 import {DataService} from '../services/data.service';
-import { ActivatedRoute} from '@angular/router';
+import {ActivatedRoute} from '@angular/router';
 
 @Component({
   selector: 'app-homeActivity',
