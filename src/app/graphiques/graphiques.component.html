@@ -42,6 +42,14 @@
     </canvas>
   </fieldset>
 </div>
+<div class="chart2" *ngIf="bothTimes" >
+  <fieldset class="fielglob">
+    <legend>Détails</legend>
+      <ul *ngIf="bothTimes">
+        <p *ngFor="let dates of bothTimes">{{dates}}</p>
+      </ul>
+  </fieldset>
+</div>
 <div class="chart" *ngIf="waiter&&pieChartColors" >
   <fieldset class="fielglob">
     <legend>Camembert de vos catégories</legend>

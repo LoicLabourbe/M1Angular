@@ -29,7 +29,7 @@ export class GraphiquesComponent implements OnInit {
   dureeTotal:number=0;
   dureeTOTAL:number=0;
   pieChartType:string = 'pie';
-
+  bothTimes:string[]=[];
 
   dureeTotalCat:number;
   percentageCat:number[]=[];
@@ -64,6 +64,7 @@ export class GraphiquesComponent implements OnInit {
     this.dureeTotal=0;
     this.dureeTOTAL=0;
     this.percentage=[];
+    this.bothTimes=[];
   }
 
   creatingList(name:Category):void {
@@ -92,28 +93,32 @@ export class GraphiquesComponent implements OnInit {
     this.tempsEndFSup=[];
     this.listeActivitees=[];
     this.listeDurees=[];
+    this.bothTimes=[];
     this.dureeTotal=0;
     this.dureeTOTAL=0;
 
-    //--- création de la liste des temps de départ selon la date de debut selectionné ---//
-    let cpt = 0;
-    for (let t = 0; t < this.allActivity2.length; t++) {
-      for (let u = 0; u < this.allActivity2[t].mesDurees.length; u++) {
-        this.tempsEnd[cpt] = this.allActivity2[t].mesDurees[u].end;
-        cpt++;
+    setTimeout(()=>{
+      //--- création de la liste des temps de départ selon la date de debut selectionné ---//
+      let cpt = 0;
+      for (let t = 0; t < this.allActivity2.length; t++) {
+        for (let u = 0; u < this.allActivity2[t].mesDurees.length; u++) {
+          this.tempsEnd[cpt] = this.allActivity2[t].mesDurees[u].end;
+          cpt++;
+        }
       }
-    }
-    GraphiquesComponent.trieTableau(this.tempsEnd);
-    GraphiquesComponent.trieTableauDoublonJ(this.tempsEnd, this.tempsEndF);
-    cpt = 0;
+      GraphiquesComponent.trieTableau(this.tempsEnd);
+      GraphiquesComponent.trieTableauDoublonJ(this.tempsEnd, this.tempsEndF);
+      cpt = 0;
 
-    //--- Selectionne les dates de fin postérieurs à la date de début ---//
-    for (let i = 0; i < this.tempsEndF.length; i++) {
-      if (this.tempsDeb.getDay() <= this.tempsEndF[i].getDay()) {
-        this.tempsEndFSup[cpt] = this.tempsEndF[i];
-        cpt++;
+      //--- Selectionne les dates de fin postérieurs à la date de début ---//
+      for (let i = 0; i < this.tempsEndF.length; i++) {
+        if (this.tempsDeb.getDay() <= this.tempsEndF[i].getDay()) {
+          this.tempsEndFSup[cpt] = this.tempsEndF[i];
+          cpt++;
+        }
       }
-    }
+    },50)
+
   }
 
   tempsFinSelected():void {
@@ -124,19 +129,25 @@ export class GraphiquesComponent implements OnInit {
     this.dureeTotal=0;
     this.dureeTOTAL=0;
     this.percentage=[];
+    this.bothTimes=[];
     setTimeout(()=> {
 
       //--- calcule des durées en fonction de la date de début et de fin selectionnées ---//
+      let cpt3=0;
+      let cpt4=0;
       for (let j = 0; j < this.allActivity2.length; j++) {
         this.dureeTotal = 0;
         for (let k = 0; k < this.allActivity2[j].mesDurees.length; k++) {
           if (this.tempsDeb.getDay() <= this.allActivity2[j].mesDurees[k].start.getDay() && this.tempsFin.getDay() >= this.allActivity2[j].mesDurees[k].end.getDay()) {
             this.dureeTotal += this.allActivity2[j].mesDurees[k].secondsPassed;
-
+            this.bothTimes[cpt3] = "["+this.allActivity2[j].nom+"] "+this.allActivity2[j].mesDurees[k].start.toLocaleDateString()+" "+this.allActivity2[j].mesDurees[k].start.toLocaleTimeString()+"  -  "+this.allActivity2[j].mesDurees[k].end.toLocaleDateString()+" "+this.allActivity2[j].mesDurees[k].end.toLocaleTimeString();
+            cpt3++;
           }
         }
-        if(this.dureeTotal!=0)
-          this.listeActivitees[j] = this.allActivity2[j].nom;
+        if(this.dureeTotal!=0) {
+          this.listeActivitees[cpt4] = this.allActivity2[j].nom;
+          cpt4++;
+        }
         this.listeDurees[j] = this.dureeTotal;
         this.dureeTOTAL += this.dureeTotal;
       }
@@ -169,7 +180,6 @@ export class GraphiquesComponent implements OnInit {
       this.allCategories=this.dataService.getCategories();
       for(let a=0;a<this.allCategories.length;a++) {
         this.listeColor[a]=this.allCategories[a].color.htmlCode.toLowerCase();
-        console.log(this.listeColor[a]);
         this.dureeTotalCat = 0;
         this.allActivityByCat[a] = this.dataService.getActivitiesByCategory(a + 1);
         for (let c = 0; c < this.allActivityByCat[a].length;c++){
