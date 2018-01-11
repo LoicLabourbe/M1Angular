@@ -27,6 +27,8 @@
 }
 
 .description > p{
+  color: white;
+  text-align: center;
   word-wrap: break-word
 }
 
@@ -51,12 +53,7 @@
   margin-bottom: 0px;
   padding-bottom: 0px;
   display: inline-block;
-  background:rgba(255,255,255, 0.1);
-  border-radius: 8px;
-  border-style: solid;
-  border-width: thin;
-  border-color: #008CBA;
-  color: #008CBA;
+  color: white;
   font-size: 1.5em;
 }
 
@@ -66,6 +63,24 @@
   position: absolute;
   top: 5px;
   right: 5px;
+}
+
+.bouton{
+  position: relative;
+  width: 500px;
+  height: 25px;
+  border-radius: 8px;
+  padding: 2px;
+  margin: 3px;
+  border-width: thin;
+  border-color: dimgray;
+  border-style: solid;
+  color: white;
+}
+bouton:hover{
+  opacity: 0.85;
+  width: 515px;
+  height: 35px;
 }
 
 .export{

@@ -13,7 +13,6 @@ export const COLORS: Color[]=[
   {libelle:"Magenta",htmlCode:"#FF00FF"},
   {libelle:"Mauve ancien",htmlCode:"#FAB0FF"},
   {libelle:"Bleue ciel",htmlCode:"#CCEEFF"},
-  {libelle:"Blanc",htmlCode:"#FFFFFF"},
   {libelle:"Argent",htmlCode:"#C0C0C0"},
   {libelle:"Gris",htmlCode:"#808080"},
   {libelle:"Noir",htmlCode:"#000000"}

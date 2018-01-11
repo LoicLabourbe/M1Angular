@@ -14,7 +14,7 @@
   <p>{{description}}</p>
 </div>
 <div>
-  <button class="export" *ngIf="!descriptionaffiche" (click)="clickDescription()" [ngStyle]="{'background':category.color.htmlCode}">Description</button>
+  <button class="bouton" *ngIf="!descriptionaffiche" (click)="clickDescription()" [ngStyle]="{'background':category.color.htmlCode}">Description</button>
 </div>
 <div>
   <button class="export" (click)="export()">Exporter</button>
