@@ -17,7 +17,6 @@
 
 .description{
   width: 500px;
-  height: 40px;
   border-radius: 8px;
   padding: 2px;
   margin: 3px;
@@ -25,8 +24,12 @@
   border-width: thin;
   border-color: dimgray;
   border-style: solid;
-  background: gainsboro;
 }
+
+.description > p{
+  word-wrap: break-word
+}
+
 .description:hover{
   opacity: 0.85;
   width: 515px;
