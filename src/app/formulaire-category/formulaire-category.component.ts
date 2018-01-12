@@ -11,11 +11,6 @@ import {DataService} from '../services/data.service';
 })
 export class FormulaireCategoryComponent implements OnInit {
 
-
-  allCategories:Category[];
-
-
-
   possibleColors=COLORS;
   libelle:string;
   color:Color;
@@ -45,7 +40,8 @@ export class FormulaireCategoryComponent implements OnInit {
   }
 
   ajouterCategory(libelle:string,color:Color):void {
-    if (libelle != null) {
+    if (libelle != null && libelle.length!=0) {
+      console.log("libelle"+"."+this.libelle+".");
       this.nbCategorie++;
       localStorage.setItem('nbCategorie', this.nbCategorie.toString());
       this.dataService.addCat(new Category(libelle, color,this.nbCategorie));
@@ -55,9 +51,7 @@ export class FormulaireCategoryComponent implements OnInit {
           break;
         }
       }
-        let cat = new Category(libelle, color,this.nbCategorie);
         this.ajoutLocal(libelle, color);
-        this.allCategories.push(cat);
         this.reinitialiser();
     }
   }
