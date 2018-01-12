@@ -21,7 +21,7 @@
       <textarea [(ngModel)]="actDesc" placeholder="Description" required></textarea>
     </div>
   </fieldset>
-  <button routerLink="/home" (click)="ajouterActivity(libelle,actDesc,category)" [attr.disabled]="libelle!=null&&actDesc!=null?null:''">Valider</button>
+  <button routerLink="/home" (click)="ajouterActivity(libelle,actDesc,category)" [attr.disabled]="libelle!=null&&libelle.length!=0&&actDesc!=null&&actDesc.length!=0?null:''">Valider</button>
 
 
 </div>
